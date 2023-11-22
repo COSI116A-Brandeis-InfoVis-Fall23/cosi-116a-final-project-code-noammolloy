@@ -23,6 +23,8 @@
         .selectionDispatcher(d3.dispatch(dispatchString))
         ("#treemap", fedExpData, selectedYear)
 
+        let bar = barchart()("#barchart", fedExpData);
+
       });
     });
   });
