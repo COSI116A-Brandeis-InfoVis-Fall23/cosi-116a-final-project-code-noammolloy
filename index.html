@@ -60,6 +60,26 @@
     
     <!-- Don't delete the closing tag! -->
     </svg>
+        <div id="timeline"> 
+      <script> //I know I need to be doing this in a javascript file, but I was struggling to get it to render on the page in a javascript file, I will figure that out before we finalize the project
+        var width = 800
+        var height = 400; 
+        var svg = d3.select("body") 
+            .append("svg") 
+            .attr("width", width) 
+            .attr("height", height); 
+  
+        var scale = d3.scaleLinear() 
+            .domain([2000, 2020]) 
+            .range([0, width - 50]); 
+  
+        var timeline = d3.axisBottom(scale); 
+  
+        svg.append("g") 
+            .attr("transform", "translate(20,100)") 
+            .call(timeline) 
+      </script>
+    </div>
     <div class="treemap-holder" id="treemap"></div>
   </div>
   
@@ -122,5 +142,8 @@
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/treemap.js"></script>
   <script src="js/visualization.js"></script>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://momentjs.com/downloads/moment.js"></script>
+  <script src = "https://d3js.org/d3-axis.v1.min.js"></script>
 </body>
 </html>
