@@ -11,12 +11,12 @@
 
         let selectedYear = "2021"  // Initial year to display
         let tmDepExp = treemap()
-        .value(d => +d["Gross Cost (in Billions)"])
-        .label(d => d["Agency Name"])
-        .colorScale(d3.scaleOrdinal(d3.schemeCategory10))
-        .selectedYear(selectedYear)
-        .selectionDispatcher(d3.dispatch(dispatchString))
-        ("#treemap", fedExpData, selectedYear)
+          .value(d => +d["Gross Cost (in Billions)"])
+          .label(d => d["Agency Name"])
+          .colorScale(d3.scaleOrdinal(d3.schemeCategory10))
+          .selectedYear(selectedYear)
+          .selectionDispatcher(d3.dispatch(dispatchString))
+          ("#treemap", fedExpData, selectedYear)
 
       });
     });
