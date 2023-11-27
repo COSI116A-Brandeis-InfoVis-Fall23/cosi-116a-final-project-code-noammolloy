@@ -17,12 +17,11 @@
           ("#treemap", fedExpData, selectedYear)
         
         
-        function createLineGraph(data) {
-          let lgDepExp = linegraph()
-          ('#linegraph', data);
-        }
-        let bar = barchart()("#barchart", fedExpData);
-        createLineGraph(fedExpData); // Call the function to create the line graph with fedExpData
+        let lgDepExp = linegraph()
+          ('#linegraph', fedExpData);
+        
+        let bar = barchart()
+          ("#barchart", fedExpData);
 
       });
     });
