@@ -11,14 +11,10 @@ function treemap() {
     value = d => d,
     label = d => d,
     colorScale = d3.scaleOrdinal(d3.schemeCategory10),
-    ourBrush = null,
-    selectableElements = d3.select(null),
     dispatcher,
     selectedYear;
 
-  function chart(selector, data, year) {
-    selectedYear = year;
-    console.log(selectedYear);
+  function chart(selector, data) {
 
     let svg = d3.select(selector)
       .append("svg")
@@ -35,8 +31,11 @@ function treemap() {
     let filteredData = data.filter(d => d["Statement Fiscal Year"] === selectedYear
       && d["Agency Name"] !== "Total"
       && d["Restatement Flag"] === "Y"
+      && d["Gross Cost (in Billions)"] >= 5
       );
 
+    console.log(filteredData);
+    
     // first formats to hierarchical structure
     let root = d3.hierarchy({ values: d3.nest().key(d => d["Statement Fiscal Year"]).entries(filteredData) }, d => d.values)
       .sum(d => +d["Gross Cost (in Billions)"]) // using sum for the case that we might want to show data for all years grouped into one treemap
@@ -62,16 +61,24 @@ function treemap() {
       .attr("fill", d => colorScale(d.data["Gross Cost (in Billions)"]));
 
     // adds department labels
-    let labels = svg.selectAll("text")
+    let labels = svg.selectAll("foreignObject")
       .data(root.leaves())
       .enter()
-      .append("text")
-      .attr("x", d => d.x0 + 5)
-      .attr("y", d => d.y0 + 15)
-      .text(d => label(d.data))
+      .append("foreignObject")
+      .attr("x", d => d.x0)
+      .attr("y", d => d.y0)
+      .attr("width", d => d.x1 - d.x0)
+      .attr("height", d => d.y1 - d.y0)
       .attr("font-size", "12px")
-      .attr("fill", "white");
-
+      .append("xhtml:div")
+      .attr("title", d => `${label(d.data)}: $${d.data["Gross Cost (in Billions)"]}B`)
+      .style("width", d => (d.x1 - d.x0) + "px")
+      .style("height", d => (d.y1 - d.y0) + "px")
+      .style("padding", "2px")
+      .append("xhtml:span")
+      .text(d => label(d.data))
+      .style("cursor", "default");
+      
     // Add a label up top for the selected year
     svg.append("text")
       .attr("x", margin.left)
@@ -79,8 +86,6 @@ function treemap() {
       .attr("text-anchor", "middle")
       .attr("font-size", "18px")
       .text(`For Fiscal Year ${selectedYear}`);
-
-    selectableElements = cells;
 
     return chart;
   }
@@ -133,11 +138,9 @@ function treemap() {
     return chart;
   };
 
-  chart.updateSelection = function (selectedData) {
+  chart.updateSelection = function (year) {
     if (!arguments.length) return;
-    selectableElements.classed("selected", d => {
-      return selectedData.includes(d.data)
-    });
+    selectedYear = year
   };
 
   return chart;

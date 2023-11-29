@@ -11,17 +11,27 @@
         let tmDepExp = treemap()
           .value(d => +d["Gross Cost (in Billions)"])
           .label(d => d["Agency Name"])
-          .colorScale(d3.scaleOrdinal(d3.schemeCategory10))
           .selectedYear(selectedYear)
           .selectionDispatcher(d3.dispatch(dispatchString))
-          ("#treemap", fedExpData, selectedYear)
+          ("#treemap", fedExpData)
         
+        let tmYearSelector = yearSelector()
+          .x(d => d["Statement Fiscal Year"])
+          .xLabel("Year")
+          .selectedYear(selectedYear)
+          .selectionDispatcher(d3.dispatch(dispatchString))
+          ("#treemap-year-selector", fedExpData)
         
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
         
         let bar = barchart()
           ("#barchart", fedExpData);
+
+
+        tmYearSelector.selectionDispatcher().on(dispatchString, function(year) {
+          tmDepExp.updateSelection(year);
+        });
 
       });
     });
