@@ -126,6 +126,12 @@
 
     <p><em>Summary of task table.</em></p>
 
+    <p>The most important task was to answer the following question: what is the general breakdown of US Government expenditures over time? The analytic task that this completes is summarizing. The search task this completes is explore. The analyze task that this completes is discover.</p>
+
+    <p>Next on the list was answering the question: how does a specific historical event affect government spending? The analytic task that this completes is identifying. The search task this completes is browse. The analyze task that this completes is derive.</p>
+
+    <p>Finally is the question: how does the political party in power affect the focus of government spending? The analytic task that this completes is compare. The search task this completes is browse. The analyze task that this completes is discover/derive.</p>
+    
     <p><em>Expectation: Clearly describes domain tasks, processes, goals and abstract tasks for domain problems.</em></p>
 
     <h1>Design Process</h1>
@@ -136,7 +142,48 @@
     Logical discussion of design choices grounded in theory from course.
     Discusses feedback from usability testing.</em></p>
 
+    <h1>Sprint 1 Task Reflection</h1>
+    <p><em>Noam</em></p>
+    <p>
+      For this sprint, I created the initial treemap using the Gross Cost for each 
+      department using the federal expenditures dataset. Currently, it only shows 
+      data for the initial year, 2021, but I will create a year selector that will 
+      allow for better data exploration. There are also other formatting issues with 
+      the current treemap that I will fix for next time such as the chart size and 
+      label text wrapping.
+    </p>
 
+    <p><em>Caitlyn</em></p>
+    <p>
+      For this sprint, I created the axis and structure for the timeline. Currently 
+      I have it in a script tag in the html file because of difficulties getting it 
+      to render on the page in the javascript file. This will be changed before the 
+      final assignment is due and I plan to work on it over break and if I cannot 
+      figure it out attend the first office hours after break. 
+    </p>
+
+    <p><em>Kirsten</em></p>
+    <p>
+      For this sprint, I was trying to create the bar graph for either the byDepartment 
+      or byYear options, but with very basic data just to test it out first. I’ve created 
+      the proper files and tried implementing it the way we’ve done for previous assignments, 
+      but I can’t seem to get the bar graph to show on the website at all (even for the bar 
+      graph we made for a previous class assignment). I’ve left the code for this in the project, 
+      but I need to work on it over break so I can figure out why it’s not showing up on the page. 
+      After that, I’ll be able to actually use the data we have to get it working. If I can’t 
+      figure it out, I’ll go to office hours to ask for help.
+    </p>
+
+    <p><em>Lucas</em></p>
+    <p>
+      For this sprint I was working on the linegraph. Right now it is just a basic linegraph 
+      with one line for each department representing the gross cost. I still need to fix some 
+      things about it, like repeating colors, a more readable legend, and adding in an option 
+      to select which departments you want to look at. Additionally I think it would be very 
+      nice to have color continuity over all the graphs. Also when there are lots of lines on 
+      the graph it becomes unreadable, so I will be thinking about ways to improve that. 
+    </p>
+    
     <h1>Conclusion</h1>
 
     <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
@@ -159,8 +206,9 @@
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/treemap.js"></script>
   <script src="js/linegraph.js"></script>
-  <script src="js/visualization.js"></script>
   <script src="js/timeline.js"></script>
+  <script src="js/visualization.js"></script>
+  
   
 </body>
 </html>

@@ -1,4 +1,4 @@
-﻿Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Billions),Earned Revenue (in Billions),Subtotal (in Billions),Change in Assumptions (in Billions),Net Cost (in Billions),Fiscal Year,Calendar Year
+Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Billions),Earned Revenue (in Billions),Subtotal (in Billions),Change in Assumptions (in Billions),Net Cost (in Billions),Fiscal Year,Calendar Year
 2022-09-30,2022,N,Department of Veterans Affairs,413.8,5.4,408.4,1526.5,1934.9,2022,2022
 2022-09-30,2022,N,Department of Health and Human Services,1812.7,154.1,1658.6,1.4,1660,2022,2022
 2022-09-30,2022,N,Department of Defense,979.6,47.6,932,527,1459,2022,2022
@@ -272,7 +272,7 @@
 2019-09-30,2019,N,Department of the Interior,21.1,2.6,18.5,null,18.5,2019,2019
 2019-09-30,2019,N,U.S. Agency for International Development,12.2,0.1,12.1,null,12.1,2019,2019
 2019-09-30,2019,N,Railroad Retirement Board,12.1,null,12.1,null,12.1,2019,2019
-2019-09-30,2019,N,Federal Communication Commission,11.2,0.4,10.8,null,10.8,2019,2019
+2019-09-30,2019,N,Federal Communications Commission,11.2,0.4,10.8,null,10.8,2019,2019
 2019-09-30,2019,N,Department of Commerce,13.8,3.6,10.2,null,10.2,2019,2019
 2019-09-30,2019,N,Environmental Protection Agency,8.8,0.3,8.5,null,8.5,2019,2019
 2019-09-30,2019,N,Pension Benefit Guaranty Corporation,35.7,27.8,7.9,null,7.9,2019,2019
@@ -314,7 +314,7 @@
 2019-09-30,2018,Y,Department of the Interior,20.4,2.9,17.5,null,17.5,2019,2019
 2019-09-30,2018,Y,U.S. Agency for International Development,13.1,null,13.1,null,13.1,2019,2019
 2019-09-30,2018,Y,Railroad Retirement Board,13.1,null,13.1,null,13.1,2019,2019
-2019-09-30,2018,Y,Federal Communication Commission,10.8,0.4,10.4,null,10.4,2019,2019
+2019-09-30,2018,Y,Federal Communications Commission,10.8,0.4,10.4,null,10.4,2019,2019
 2019-09-30,2018,Y,Department of Commerce,11.8,3.6,8.2,null,8.2,2019,2019
 2019-09-30,2018,Y,Environmental Protection Agency,8.3,0.4,7.9,null,7.9,2019,2019
 2019-09-30,2018,Y,Pension Benefit Guaranty Corporation,-7.8,16.7,-24.5,null,-24.5,2019,2019
@@ -696,7 +696,7 @@
 2014-09-30,2014,N,General Services Administration,0.7,0.6,0.1,null,0.1,2014,2014
 2014-09-30,2014,N,Export-Import Bank of the United States,1.1,1.1,null,null,null,2014,2014
 2014-09-30,2014,N,Farm Credit System Insurance Corporation,null,0.2,-0.2,null,-0.2,2014,2014
-2014-09-30,2014,N,Overseas Private Investments Corporation,-0.3,0.1,-0.4,null,-0.4,2014,2014
+2014-09-30,2014,N,Overseas Private Investment Corporation,-0.3,0.1,-0.4,null,-0.4,2014,2014
 2014-09-30,2014,N,Securities and Exchange Commission,1.4,1.9,-0.5,null,-0.5,2014,2014
 2014-09-30,2014,N,Tennessee Valley Authority,10.5,11.1,-0.6,null,-0.6,2014,2014
 2014-09-30,2014,N,Small Business Administration,-0.3,0.4,-0.7,null,-0.7,2014,2014
@@ -736,7 +736,7 @@
 2014-09-30,2013,Y,General Services Administration,0.1,0.7,-0.6,null,-0.6,2014,2014
 2014-09-30,2013,Y,Export-Import Bank of the United States,1.1,1,0.1,null,0.1,2014,2014
 2014-09-30,2013,Y,Farm Credit System Insurance Corporation,null,0.1,-0.1,null,-0.1,2014,2014
-2014-09-30,2013,Y,Overseas Private Investments Corporation,0.3,0.1,0.2,null,0.2,2014,2014
+2014-09-30,2013,Y,Overseas Private Investment Corporation,0.3,0.1,0.2,null,0.2,2014,2014
 2014-09-30,2013,Y,Securities and Exchange Commission,1.3,1.8,-0.5,null,-0.5,2014,2014
 2014-09-30,2013,Y,Tennessee Valley Authority,10.7,11,-0.3,-0.2,-0.5,2014,2014
 2014-09-30,2013,Y,Small Business Administration,0.7,0.4,0.3,null,0.3,2014,2014
@@ -1204,7 +1204,7 @@
 2008-09-30,2007,Y,U.S. Postal Service,60.1,73.7,null,null,-13.6,2008,2008
 2008-09-30,2007,Y,All other entities,23.5,0.7,null,null,22.8,2008,2008
 2008-09-30,2007,Y,Total,3157.3,247.8,null,null,2909.5,2008,2008
-2007-09-30,2007,N,Department of Health & Human Services,718.6,51.8,null,null,666.8,2007,2007
+2007-09-30,2007,N,Department of Health and Human Services,718.6,51.8,null,null,666.8,2007,2007
 2007-09-30,2007,N,Department of Defense,689.6,25.1,null,null,664.5,2007,2007
 2007-09-30,2007,N,Social Security Administration,626.4,0.3,null,null,626.1,2007,2007
 2007-09-30,2007,N,Interest on Treasury Securities held by the public,238.9,null,null,null,238.9,2007,2007
@@ -1239,7 +1239,7 @@
 2007-09-30,2007,N,U.S. Postal Service,60.1,73.7,null,null,-13.6,2007,2007
 2007-09-30,2007,N,All other entities,25.2,2.3,null,null,22.9,2007,2007
 2007-09-30,2007,N,Total,3157.3,247.8,null,null,2909.5,2007,2007
-2007-09-30,2006,Y,Department of Health & Human Services,678.8,51.4,null,null,627.4,2007,2007
+2007-09-30,2006,Y,Department of Health and Human Services,678.8,51.4,null,null,627.4,2007,2007
 2007-09-30,2006,Y,Department of Defense,658,24.1,null,null,633.9,2007,2007
 2007-09-30,2006,Y,Social Security Administration,593.1,0.3,null,null,592.8,2007,2007
 2007-09-30,2006,Y,Interest on Treasury Securities held by the public,221.5,null,null,null,221.5,2007,2007
@@ -1275,7 +1275,7 @@
 2007-09-30,2006,Y,All other entities,27,-3.5,null,null,30.5,2007,2007
 2007-09-30,2006,Y,Total,3127.7,226.4,null,null,2901.3,2007,2007
 2006-09-30,2006,N,Department of Defense,658,24.1,null,null,633.9,2006,2006
-2006-09-30,2006,N,Department of Health & Human Services,678.8,51.4,null,null,627.4,2006,2006
+2006-09-30,2006,N,Department of Health and Human Services,678.8,51.4,null,null,627.4,2006,2006
 2006-09-30,2006,N,Social Security Administration,593.1,0.3,null,null,592.8,2006,2006
 2006-09-30,2006,N,Interest on Treasury Securities held by the public,221.5,null,null,null,221.5,2006,2006
 2006-09-30,2006,N,Department of Veterans Affairs,117.3,3.5,null,null,113.8,2006,2006
@@ -1310,7 +1310,7 @@
 2006-09-30,2006,N,All other entities,27,-3.5,null,null,30.5,2006,2006
 2006-09-30,2006,N,Total,3127.7,226.4,null,null,2901.3,2006,2006
 2006-09-30,2005,Y,Department of Defense,703.9,26.9,null,null,677,2006,2006
-2006-09-30,2005,Y,Department of Health & Human Services,623.4,39.6,null,null,583.8,2006,2006
+2006-09-30,2005,Y,Department of Health and Human Services,623.4,39.6,null,null,583.8,2006,2006
 2006-09-30,2005,Y,Social Security Administration,572.1,-2,null,null,574.1,2006,2006
 2006-09-30,2005,Y,Interest on Treasury Securities held by the public,181.2,null,null,null,181.2,2006,2006
 2006-09-30,2005,Y,Department of Veterans Affairs,276.6,3.4,null,null,273.2,2006,2006
@@ -1345,7 +1345,7 @@
 2006-09-30,2005,Y,All other entities,30.3,7.6,null,null,22.7,2006,2006
 2006-09-30,2005,Y,Total,3174.6,224.8,null,null,2949.8,2006,2006
 2005-09-30,2005,N,Department of Defense,703.9,26.9,null,null,677,2005,2005
-2005-09-30,2005,N,Department of Health & Human Services,623.4,39.6,null,null,583.8,2005,2005
+2005-09-30,2005,N,Department of Health and Human Services,623.4,39.6,null,null,583.8,2005,2005
 2005-09-30,2005,N,Social Security Administration,572.1,-2,null,null,574.1,2005,2005
 2005-09-30,2005,N,Department of Veterans Affairs,276.6,3.4,null,null,273.2,2005,2005
 2005-09-30,2005,N,Interest on Treasury Securities held by the public,181.2,null,null,null,181.2,2005,2005
@@ -1380,7 +1380,7 @@
 2005-09-30,2005,N,All other entities,30.3,7.6,null,null,22.7,2005,2005
 2005-09-30,2005,N,Total,3174.6,224.8,null,null,2949.8,2005,2005
 2005-09-30,2004,Y,Department of Defense,672.1,22.3,null,null,649.8,2005,2005
-2005-09-30,2004,Y,Department of Health & Human Services,583.9,33.4,null,null,550.5,2005,2005
+2005-09-30,2004,Y,Department of Health and Human Services,583.9,33.4,null,null,550.5,2005,2005
 2005-09-30,2004,Y,Social Security Administration,534.9,2.6,null,null,532.3,2005,2005
 2005-09-30,2004,Y,Department of Veterans Affairs,51.1,3.2,null,null,47.9,2005,2005
 2005-09-30,2004,Y,Interest on Treasury Securities held by the public,158.3,null,null,null,158.3,2005,2005
@@ -1415,7 +1415,7 @@
 2005-09-30,2004,Y,All other entities,30.6,11.1,null,null,19.5,2005,2005
 2005-09-30,2004,Y,Total,2732,207.1,null,null,2524.9,2005,2005
 2004-09-30,2004,N,Department of Defense,672.1,22.3,null,null,649.8,2004,2004
-2004-09-30,2004,N,Department of Health & Human Services,583.9,33.4,null,null,550.5,2004,2004
+2004-09-30,2004,N,Department of Health and Human Services,583.9,33.4,null,null,550.5,2004,2004
 2004-09-30,2004,N,Social Security Administration,534.9,2.6,null,null,532.3,2004,2004
 2004-09-30,2004,N,Interest on Treasury Securities held by the public,158.3,null,null,null,158.3,2004,2004
 2004-09-30,2004,N,Department of Agriculture,84.1,7.6,null,null,76.5,2004,2004
@@ -1450,7 +1450,7 @@
 2004-09-30,2004,N,All other entities,30.6,11.1,null,null,19.5,2004,2004
 2004-09-30,2004,N,Total,2732,207.1,null,null,2524.9,2004,2004
 2004-09-30,2003,Y,Department of Defense,562.2,12.5,null,null,549.7,2004,2004
-2004-09-30,2003,Y,Department of Health & Human Services,542.3,29.7,null,null,512.6,2004,2004
+2004-09-30,2003,Y,Department of Health and Human Services,542.3,29.7,null,null,512.6,2004,2004
 2004-09-30,2003,Y,Social Security Administration,512.6,0.3,null,null,512.3,2004,2004
 2004-09-30,2003,Y,Interest on Treasury Securities held by the public,156.8,null,null,null,156.8,2004,2004
 2004-09-30,2003,Y,Department of Agriculture,95,10.7,null,null,84.3,2004,2004
@@ -1489,9 +1489,9 @@
 2003-09-30,2003,N,Department of Defense,562.4,12.5,null,null,549.9,2003,2003
 2003-09-30,2003,N,Department of Education,59,5,null,null,54,2003,2003
 2003-09-30,2003,N,Department of Energy,2,5.3,null,null,-3.3,2003,2003
-2003-09-30,2003,N,Department of Health & Human Services,542.6,29.7,null,null,512.9,2003,2003
+2003-09-30,2003,N,Department of Health and Human Services,542.6,29.7,null,null,512.9,2003,2003
 2003-09-30,2003,N,Department of Homeland Security,27.5,2.6,null,null,24.9,2003,2003
-2003-09-30,2003,N,Department of Housing & Urban Development,44.1,2,null,null,42.1,2003,2003
+2003-09-30,2003,N,Department of Housing and Urban Development,44.1,2,null,null,42.1,2003,2003
 2003-09-30,2003,N,Department of the Interior,16,4.7,null,null,11.3,2003,2003
 2003-09-30,2003,N,Department of Justice,30.7,1.3,null,null,29.4,2003,2003
 2003-09-30,2003,N,Department of Labor,68.1,null,null,null,68.1,2003,2003
@@ -1504,7 +1504,7 @@
 2003-09-30,2003,N,Environmental Protection Agency,9.5,0.4,null,null,9.1,2003,2003
 2003-09-30,2003,N,Federal Emergency Management Agency,2.5,0.8,null,null,1.7,2003,2003
 2003-09-30,2003,N,General Services Administration,0.8,0.3,null,null,0.5,2003,2003
-2003-09-30,2003,N,National Aeronautics & Space Administration,12.9,0.1,null,null,12.8,2003,2003
+2003-09-30,2003,N,National Aeronautics and Space Administration,12.9,0.1,null,null,12.8,2003,2003
 2003-09-30,2003,N,National Science Foundation,4.8,null,null,null,4.8,2003,2003
 2003-09-30,2003,N,U.S. Nuclear Regulatory Commission,0.7,0.5,null,null,0.2,2003,2003
 2003-09-30,2003,N,Office of Personnel Management,0.3,null,null,null,0.3,2003,2003
@@ -1525,9 +1525,9 @@
 2003-09-30,2002,Y,Department of Defense,420.4,13.9,null,null,406.5,2003,2003
 2003-09-30,2002,Y,Department of Education,49.9,4.8,null,null,45.1,2003,2003
 2003-09-30,2002,Y,Department of Energy,-3,4.8,null,null,-7.8,2003,2003
-2003-09-30,2002,Y,Department of Health & Human Services,499.9,27,null,null,472.9,2003,2003
+2003-09-30,2002,Y,Department of Health and Human Services,499.9,27,null,null,472.9,2003,2003
 2003-09-30,2002,Y,Department of Homeland Security,null,null,null,null,null,2003,2003
-2003-09-30,2002,Y,Department of Housing & Urban Development,36.3,2.2,null,null,34.1,2003,2003
+2003-09-30,2002,Y,Department of Housing and Urban Development,36.3,2.2,null,null,34.1,2003,2003
 2003-09-30,2002,Y,Department of the Interior,15,0.7,null,null,14.3,2003,2003
 2003-09-30,2002,Y,Department of Justice,29.5,2.3,null,null,27.2,2003,2003
 2003-09-30,2002,Y,Department of Labor,64.7,null,null,null,64.7,2003,2003
@@ -1540,7 +1540,7 @@
 2003-09-30,2002,Y,Environmental Protection Agency,8.2,0.5,null,null,7.7,2003,2003
 2003-09-30,2002,Y,Federal Emergency Management Agency,6.2,1.8,null,null,4.4,2003,2003
 2003-09-30,2002,Y,General Services Administration,-0.1,0.3,null,null,-0.4,2003,2003
-2003-09-30,2002,Y,National Aeronautics & Space Administration,14.7,0.1,null,null,14.6,2003,2003
+2003-09-30,2002,Y,National Aeronautics and Space Administration,14.7,0.1,null,null,14.6,2003,2003
 2003-09-30,2002,Y,National Science Foundation,4.2,null,null,null,4.2,2003,2003
 2003-09-30,2002,Y,U.S. Nuclear Regulatory Commission,0.6,0.4,null,null,0.2,2003,2003
 2003-09-30,2002,Y,Office of Personnel Management,0.2,null,null,null,0.2,2003,2003
@@ -1561,9 +1561,9 @@
 2002-09-30,2002,N,Department of Defense,420.4,13.9,null,null,406.5,2002,2002
 2002-09-30,2002,N,Department of Education,49.9,4.8,null,null,45.1,2002,2002
 2002-09-30,2002,N,Department of Energy,-3,4.8,null,null,-7.8,2002,2002
-2002-09-30,2002,N,Department of Health & Human Services,499.9,27,null,null,472.9,2002,2002
-2002-09-30,2002,N,Department of Housing & Urban Development,36.3,2.2,null,null,34.1,2002,2002
-2002-09-30,2002,N,Department of Interior,15,0.7,null,null,14.3,2002,2002
+2002-09-30,2002,N,Department of Health and Human Services,499.9,27,null,null,472.9,2002,2002
+2002-09-30,2002,N,Department of Housing and Urban Development,36.3,2.2,null,null,34.1,2002,2002
+2002-09-30,2002,N,Department of the Interior,15,0.7,null,null,14.3,2002,2002
 2002-09-30,2002,N,Department of Justice,29.5,2.3,null,null,27.2,2002,2002
 2002-09-30,2002,N,Department of Labor,64.7,null,null,null,64.7,2002,2002
 2002-09-30,2002,N,Department of State,10.9,0.9,null,null,10,2002,2002
@@ -1575,7 +1575,7 @@
 2002-09-30,2002,N,Environmental Protection Agency,8.2,0.5,null,null,7.7,2002,2002
 2002-09-30,2002,N,Federal Emergency Management Agency,6.2,1.8,null,null,4.4,2002,2002
 2002-09-30,2002,N,General Services Administration,-0.1,0.3,null,null,-0.4,2002,2002
-2002-09-30,2002,N,National Aeronautics & Space Administration,14.7,0.1,null,null,14.6,2002,2002
+2002-09-30,2002,N,National Aeronautics and Space Administration,14.7,0.1,null,null,14.6,2002,2002
 2002-09-30,2002,N,National Science Foundation,4.2,null,null,null,4.2,2002,2002
 2002-09-30,2002,N,U.S. Nuclear Regulatory Commission,0.6,0.4,null,null,0.2,2002,2002
 2002-09-30,2002,N,Office of Personnel Management,0.2,null,null,null,0.2,2002,2002
@@ -1596,9 +1596,9 @@
 2002-09-30,2001,Y,Department of Defense,776.8,12.6,null,null,764.2,2002,2002
 2002-09-30,2001,Y,Department of Education,39.9,4.1,null,null,35.8,2002,2002
 2002-09-30,2001,Y,Department of Energy,27,5.2,null,null,21.8,2002,2002
-2002-09-30,2001,Y,Department of Health & Human Services,459.2,24.7,null,null,434.5,2002,2002
-2002-09-30,2001,Y,Department of Housing & Urban Development,34.5,2.4,null,null,32.1,2002,2002
-2002-09-30,2001,Y,Department of Interior,11.7,0.3,null,null,11.4,2002,2002
+2002-09-30,2001,Y,Department of Health and Human Services,459.2,24.7,null,null,434.5,2002,2002
+2002-09-30,2001,Y,Department of Housing and Urban Development,34.5,2.4,null,null,32.1,2002,2002
+2002-09-30,2001,Y,Department of the Interior,11.7,0.3,null,null,11.4,2002,2002
 2002-09-30,2001,Y,Department of Justice,26.5,2.3,null,null,24.2,2002,2002
 2002-09-30,2001,Y,Department of Labor,42.3,null,null,null,42.3,2002,2002
 2002-09-30,2001,Y,Department of State,10,1,null,null,9,2002,2002
@@ -1610,7 +1610,7 @@
 2002-09-30,2001,Y,Environmental Protection Agency,8.4,0.5,null,null,7.9,2002,2002
 2002-09-30,2001,Y,Federal Emergency Management Agency,6.3,1.6,null,null,4.7,2002,2002
 2002-09-30,2001,Y,General Services Administration,0.1,0.3,null,null,-0.2,2002,2002
-2002-09-30,2001,Y,National Aeronautics & Space Administration,9.2,0.1,null,null,9.1,2002,2002
+2002-09-30,2001,Y,National Aeronautics and Space Administration,9.2,0.1,null,null,9.1,2002,2002
 2002-09-30,2001,Y,National Science Foundation,3.7,null,null,null,3.7,2002,2002
 2002-09-30,2001,Y,U.S. Nuclear Regulatory Commission,0.6,0.4,null,null,0.2,2002,2002
 2002-09-30,2001,Y,Office of Personnel Management,0.2,null,null,null,0.2,2002,2002
@@ -1631,9 +1631,9 @@
 2001-09-30,2001,N,Department of Defense,776.8,12.6,null,null,764.2,2001,2001
 2001-09-30,2001,N,Department of Education,39.9,4.1,null,null,35.8,2001,2001
 2001-09-30,2001,N,Department of Energy,27,5.2,null,null,21.8,2001,2001
-2001-09-30,2001,N,Department of Health & Human Services,459.2,24.7,null,null,434.5,2001,2001
-2001-09-30,2001,N,Department of Housing & Urban Development,34.5,2.4,null,null,32.1,2001,2001
-2001-09-30,2001,N,Department of Interior,11.7,0.3,null,null,11.4,2001,2001
+2001-09-30,2001,N,Department of Health and Human Services,459.2,24.7,null,null,434.5,2001,2001
+2001-09-30,2001,N,Department of Housing and Urban Development,34.5,2.4,null,null,32.1,2001,2001
+2001-09-30,2001,N,Department of the Interior,11.7,0.3,null,null,11.4,2001,2001
 2001-09-30,2001,N,Department of Justice,26.5,2.3,null,null,24.2,2001,2001
 2001-09-30,2001,N,Department of Labor,42.3,null,null,null,42.3,2001,2001
 2001-09-30,2001,N,Department of State,10,1,null,null,9,2001,2001
@@ -1645,7 +1645,7 @@
 2001-09-30,2001,N,Environmental Protection Agency,8.4,0.5,null,null,7.9,2001,2001
 2001-09-30,2001,N,Federal Emergency Management Agency,6.3,1.6,null,null,4.7,2001,2001
 2001-09-30,2001,N,General Services Administration,0.1,0.3,null,null,-0.2,2001,2001
-2001-09-30,2001,N,National Aeronautics & Space Administration,9.2,0.1,null,null,9.1,2001,2001
+2001-09-30,2001,N,National Aeronautics and Space Administration,9.2,0.1,null,null,9.1,2001,2001
 2001-09-30,2001,N,National Science Foundation,3.7,null,null,null,3.7,2001,2001
 2001-09-30,2001,N,U.S. Nuclear Regulatory Commission,0.6,0.4,null,null,0.2,2001,2001
 2001-09-30,2001,N,Office of Personnel Management,0.2,null,null,null,0.2,2001,2001
@@ -1666,9 +1666,9 @@
 2001-09-30,2000,Y,Department of Defense,393.5,11.3,null,null,382.2,2001,2001
 2001-09-30,2000,Y,Department of Education,32.9,3.3,null,null,29.6,2001,2001
 2001-09-30,2000,Y,Department of Energy,28.9,4.7,null,null,24.2,2001,2001
-2001-09-30,2000,Y,Department of Health & Human Services,410.2,23,null,null,387.2,2001,2001
-2001-09-30,2000,Y,Department of Housing & Urban Development,36.5,3.1,null,null,33.4,2001,2001
-2001-09-30,2000,Y,Department of Interior,13.3,2.9,null,null,10.4,2001,2001
+2001-09-30,2000,Y,Department of Health and Human Services,410.2,23,null,null,387.2,2001,2001
+2001-09-30,2000,Y,Department of Housing and Urban Development,36.5,3.1,null,null,33.4,2001,2001
+2001-09-30,2000,Y,Department of the Interior,13.3,2.9,null,null,10.4,2001,2001
 2001-09-30,2000,Y,Department of Justice,27,1.9,null,null,25.1,2001,2001
 2001-09-30,2000,Y,Department of Labor,32.8,1.2,null,null,31.6,2001,2001
 2001-09-30,2000,Y,Department of State,9.4,0.5,null,null,8.9,2001,2001
@@ -1680,7 +1680,7 @@
 2001-09-30,2000,Y,Environmental Protection Agency,8.3,0.3,null,null,8,2001,2001
 2001-09-30,2000,Y,Federal Emergency Management Agency,4.7,1.6,null,null,3.1,2001,2001
 2001-09-30,2000,Y,General Services Administration,0.3,0.3,null,null,null,2001,2001
-2001-09-30,2000,Y,National Aeronautics & Space Administration,11.7,0.1,null,null,11.6,2001,2001
+2001-09-30,2000,Y,National Aeronautics and Space Administration,11.7,0.1,null,null,11.6,2001,2001
 2001-09-30,2000,Y,National Science Foundation,3.5,null,null,null,3.5,2001,2001
 2001-09-30,2000,Y,U.S. Nuclear Regulatory Commission,0.6,0.4,null,null,0.2,2001,2001
 2001-09-30,2000,Y,Office of Personnel Management,0.2,null,null,null,0.2,2001,2001
