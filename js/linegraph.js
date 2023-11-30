@@ -51,6 +51,38 @@ function linegraph() {
         .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])])
         .range([height, 0]);
       
+      // Define x and y axes
+const xAxis = d3.axisBottom(xScale);
+const yAxis = d3.axisLeft(yScale);
+
+// Append x-axis to the SVG
+svg.append('g')
+  .attr('class', 'x-axis')
+  .attr('transform', `translate(0, ${height})`)
+  .call(xAxis);
+
+// Append y-axis to the SVG
+svg.append('g')
+  .attr('class', 'y-axis')
+  .call(yAxis);
+
+// Add a label for the x-axis
+svg.append('text')
+  .attr('transform', `translate(${width / 2},${height + margin.top})`)
+  .style('text-anchor', 'middle')
+  .style('font-size', '14px')
+  .text('Record Date');
+
+// Add a label for the y-axis
+svg.append('text')
+  .attr('transform', 'rotate(-90)')
+  .attr('y', 0 - margin.left - 30)
+  .attr('x', 0 - (height / 2))
+  .attr('dy', '1em')
+  .style('text-anchor', 'middle')
+  .style('font-size', '14px')
+  .text('Gross Cost (in Billions)');
+
     const itemsPerColumn = 10;
     const legendWidth = 400;
 
@@ -99,29 +131,6 @@ lineChartData.forEach(agencyData => {
     .attr('d', line);
 });
 
-svg.append('text')
-.attr('x', width / 2)
-.attr('y', 0 - (margin.top / 2))
-.attr('text-anchor', 'middle')
-.style('font-size', '16px')
-.text('Federal Expenditures Over Time');
-
-// Add a label for the x-axis
-svg.append('text')
-.attr('transform', `translate(${width / 2},${height + margin.top})`)
-.style('text-anchor', 'middle')
-.style('font-size', '14px')
-.text('Record Date');
-
-// Add a label for the y-axis
-svg.append('text')
-.attr('transform', 'rotate(-90)')
-.attr('y', 0 - margin.left)
-.attr('x', 0 - (height / 2))
-.attr('dy', '1em')
-.style('text-anchor', 'middle')
-.style('font-size', '14px')
-.text('Gross Cost (in Billions)');
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
