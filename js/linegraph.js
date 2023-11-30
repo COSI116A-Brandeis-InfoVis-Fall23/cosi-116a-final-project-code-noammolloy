@@ -175,10 +175,28 @@ function handleChange() {
     const selectedDepartments = checkboxContainer.selectAll('.checkbox__control:checked')
       .data()
       .map(d => d); // Adjust based on your data structure
-  
+    updateGraph(selectedDepartments)
     // Do something with the selected departments
     console.log('Selected Departments:', selectedDepartments);
   }
+  function updateGraph(selectedDepartments) {
+    svg.selectAll('.line').remove();
+    // Step 2: Use selectedDepartments to filter the data and update the graph
+    const filteredData = lineChartData
+        .filter(agencyData => selectedDepartments.includes(agencyData.name));
+
+    // Clear existing graph
+    svg.selectAll('path').remove();
+
+    // Draw lines for the selected departments
+    filteredData.forEach(agencyData => {
+        svg.append('path')
+            .datum(agencyData.values.filter(d => !isNaN(d.cost)))
+            .attr('fill', 'none')
+            .attr('stroke', colorScale(agencyData.name))
+            .attr('d', line);
+    });
+}
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
