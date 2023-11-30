@@ -86,42 +86,81 @@ svg.append('text')
     const itemsPerColumn = 10;
     const legendWidth = 400;
 
-    const legend = svg.append('g')
-      .attr('class', 'legend')
-      .attr('transform', `translate(${width - legendWidth}, 20)`);
+    // const legend = svg.append('g')
+    //   .attr('class', 'legend')
+    //   .attr('transform', `translate(${width - legendWidth}, 20)`);
 
-    const legendItems = legend.selectAll('.legend-item')
-      .data(uniqueAgencies)
-      .enter()
-      .append('g')
-      .attr('class', 'legend-item')
-      .attr('transform', (d, i) => {
-        const col = Math.floor(i / itemsPerColumn);
-        const row = i % itemsPerColumn;
-        const x = col * (legendWidth / 2);
-        const y = row * 20;
-        return `translate(${x},${y})`;
-      });
+    // const legendItems = legend.selectAll('.legend-item')
+    //   .data(uniqueAgencies)
+    //   .enter()
+    //   .append('g')
+    //   .attr('class', 'legend-item')
+    //   .attr('transform', (d, i) => {
+    //     const col = Math.floor(i / itemsPerColumn);
+    //     const row = i % itemsPerColumn;
+    //     const x = col * (legendWidth / 2);
+    //     const y = row * 20;
+    //     return `translate(${x},${y})`;
+    //   });
 
-    legendItems.append('rect')
-      .attr('x', 0)
-      .attr('y', 0)
-      .attr('width', 10)
-      .attr('height', 10)
-      .attr('fill', d => colorScale(d));
+    // legendItems.append('rect')
+    //   .attr('x', 0)
+    //   .attr('y', 0)
+    //   .attr('width', 10)
+    //   .attr('height', 10)
+    //   .attr('fill', d => colorScale(d));
 
-    legendItems.append('text')
-      .attr('x', 15)
-      .attr('y', 10)
-      .text(d => d)
-      .style('font-size', '8px')
-      .attr('alignment-baseline', 'hanging');
+    // legendItems.append('text')
+    //   .attr('x', 15)
+    //   .attr('y', 10)
+    //   .text(d => d)
+    //   .style('font-size', '8px')
+    //   .attr('alignment-baseline', 'hanging');
+
+    const commonParent = d3.select('.vis-holder');
+
+// Select the linegraph SVG to get its position
+const linegraphSVG = commonParent.select('#linegraph');
+const linegraphRect = linegraphSVG.node().getBoundingClientRect();
+const linegraphX = linegraphRect.left + window.scrollX;
+const linegraphY = linegraphRect.top + window.scrollY;
+
+// Append the checkbox container aligned with the linegraph SVG
+const checkboxContainer = commonParent.insert('div', 'linegraph-holder')
+    .attr('class', 'checkbox-container')
+    .style('position', 'absolute')
+    .style('left', `${linegraphX}px`)
+    .style('top', `${linegraphY}px`);
+
+const checkboxes = checkboxContainer.selectAll('.checkbox')
+    .data(uniqueAgencies)
+    .enter()
+    .append('div')
+    .attr('class', 'checkbox')
+    .style('transform', (d, i) => {
+        const y = i * 5; // Adjust the vertical positioning as needed
+        return `translate(0, ${y}px)`;
+    });
+
+checkboxes.append('input')
+    .attr('type', 'checkbox')
+    .attr('class', 'checkbox__control')
+    .attr('id', (d, i) => `checkbox-${i}`)
+    .attr('data-department', d => d)
+    .on('change', handleChange);
+
+checkboxes.append('label')
+    .attr('for', (d, i) => `checkbox-${i}`)
+    .text(d => d);
+
+
 
       const line = d3.line()
   .defined(d => !isNaN(d.cost)) // Filter out NaN values in 'cost'
   .x(d => xScale(d.date))
   .y(d => yScale(d.cost));
 
+  
 // Loop through each agency's data and draw a line for each
 lineChartData.forEach(agencyData => {
   svg.append('path')
@@ -131,6 +170,15 @@ lineChartData.forEach(agencyData => {
     .attr('d', line);
 });
 
+function handleChange() {
+    // Handle checkbox change event
+    const selectedDepartments = checkboxContainer.selectAll('.checkbox__control:checked')
+      .data()
+      .map(d => d); // Adjust based on your data structure
+  
+    // Do something with the selected departments
+    console.log('Selected Departments:', selectedDepartments);
+  }
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
