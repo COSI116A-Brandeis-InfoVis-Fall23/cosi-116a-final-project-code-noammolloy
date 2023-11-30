@@ -10,7 +10,6 @@ function linegraph() {
     let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
   
     function chart(selector, data) {
-      // Define a time parser within the linegraph function
       const parseTime = d3.timeParse('%Y-%m-%d');
   
       data.forEach(d => {
@@ -86,37 +85,6 @@ svg.append('text')
     const itemsPerColumn = 10;
     const legendWidth = 400;
 
-    // const legend = svg.append('g')
-    //   .attr('class', 'legend')
-    //   .attr('transform', `translate(${width - legendWidth}, 20)`);
-
-    // const legendItems = legend.selectAll('.legend-item')
-    //   .data(uniqueAgencies)
-    //   .enter()
-    //   .append('g')
-    //   .attr('class', 'legend-item')
-    //   .attr('transform', (d, i) => {
-    //     const col = Math.floor(i / itemsPerColumn);
-    //     const row = i % itemsPerColumn;
-    //     const x = col * (legendWidth / 2);
-    //     const y = row * 20;
-    //     return `translate(${x},${y})`;
-    //   });
-
-    // legendItems.append('rect')
-    //   .attr('x', 0)
-    //   .attr('y', 0)
-    //   .attr('width', 10)
-    //   .attr('height', 10)
-    //   .attr('fill', d => colorScale(d));
-
-    // legendItems.append('text')
-    //   .attr('x', 15)
-    //   .attr('y', 10)
-    //   .text(d => d)
-    //   .style('font-size', '8px')
-    //   .attr('alignment-baseline', 'hanging');
-
     const commonParent = d3.select('.vis-holder');
 
 // Select the linegraph SVG to get its position
@@ -132,16 +100,18 @@ const checkboxContainer = commonParent.insert('div', 'linegraph-holder')
     .style('left', `${linegraphX}px`)
     .style('top', `${linegraphY}px`);
 
+// Append a checkbox item for each selected department
 const checkboxes = checkboxContainer.selectAll('.checkbox')
     .data(uniqueAgencies)
     .enter()
     .append('div')
     .attr('class', 'checkbox')
     .style('transform', (d, i) => {
-        const y = i * 5; // Adjust the vertical positioning as needed
+        const y = i * 5;
         return `translate(0, ${y}px)`;
     });
 
+// get the input from the checkboxes
 checkboxes.append('input')
     .attr('type', 'checkbox')
     .attr('class', 'checkbox__control')
@@ -171,18 +141,17 @@ lineChartData.forEach(agencyData => {
     .attr('d', line);
 });
 
+// gets all checked boxes and passes the new data to update the graph
 function handleChange() {
-    // Handle checkbox change event
     const selectedDepartments = checkboxContainer.selectAll('.checkbox__control:checked')
       .data()
-      .map(d => d); // Adjust based on your data structure
+      .map(d => d);
     updateGraph(selectedDepartments)
-    // Do something with the selected departments
     console.log('Selected Departments:', selectedDepartments);
   }
+  // clears and redraws graph with new parameters
   function updateGraph(selectedDepartments) {
     svg.selectAll('.line').remove();
-    // Step 2: Use selectedDepartments to filter the data and update the graph
     const filteredData = lineChartData
         .filter(agencyData => selectedDepartments.includes(agencyData.name));
 

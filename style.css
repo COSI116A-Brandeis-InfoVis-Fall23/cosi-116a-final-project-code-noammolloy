@@ -136,29 +136,23 @@ input[type="range"]:hover::-webkit-slider-thumb {
 
 .checkbox-container {
 	font-family: Arial, sans-serif;
-	/* Add any other styles you want for the container */
   }
   
   .checkbox {
 	display: flex;
 	align-items: center;
-	/* Add any other styles you want for each checkbox item */
   }
   
   .checkbox__control {
 	margin-right: 8px;
-	/* Add any other styles you want for the checkbox input */
   }
-  
-  /* Optional: Add styles for when the checkbox is checked */
   .checkbox__control:checked + label {
 	font-weight: bold;
-	/* color: #0066cc; Change this to your desired color */
   }
   .checkbox-container {
-	font-size: 10px; /* Adjust the font size as needed */
+	font-size: 10px;
   }
   
   .checkbox label {
-	font-size: 10px; /* Adjust the font size for the labels */
+	font-size: 10px;
   }
