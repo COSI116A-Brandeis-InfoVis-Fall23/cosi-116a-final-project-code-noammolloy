@@ -8,7 +8,8 @@ function barchart() {
       width = 500 - margin.left - margin.right,
       height = 500 - margin.top - margin.bottom,
       barPadding = 10,
-      barWidth = (width / dataset.length);
+    //   barWidth = (width / dataset.length);
+      barWidth = 10;
     
     /* gets passed federal expenditure data but doesn't 
     use it for this assignment because I'm still testing it */

@@ -7,21 +7,19 @@
 
         const dispatchString = "selectionUpdated";
 
-        let selectedYear = "2021"  // Initial year to display
+        const yearSlider = d3.select("#year-slider")
+        
         let tmDepExp = treemap()
           .value(d => +d["Gross Cost (in Billions)"])
           .label(d => d["Agency Name"])
-          .selectedYear(selectedYear)
+          .selectedYear(yearSlider.property("value"))
           .selectionDispatcher(d3.dispatch(dispatchString))
           ("#treemap", fedExpData)
         
-        let tmYearSelector = yearSelector()
-          .x(d => d["Statement Fiscal Year"])
-          .xLabel("Year")
-          .selectedYear(selectedYear)
-          .selectionDispatcher(d3.dispatch(dispatchString))
-          ("#treemap-year-selector", fedExpData)
-        
+        yearSlider.on("input", function() {
+          tmDepExp.updateSelection(this.value);
+        });
+
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
         
@@ -29,9 +27,6 @@
           ("#barchart", fedExpData);
 
 
-        tmYearSelector.selectionDispatcher().on(dispatchString, function(year) {
-          tmDepExp.updateSelection(year);
-        });
 
       });
     });
