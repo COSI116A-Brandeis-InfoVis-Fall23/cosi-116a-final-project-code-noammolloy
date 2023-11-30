@@ -11,7 +11,7 @@ function timeline(){
         .domain([2000, 2020]) 
         .range([0, width - 50]); 
 
-    var timeline = d3.axisBottom(scale); 
+    var timeline = d3.axisBottom(scale).tickFormat(d3.format("d"));
 
     svg.append("g") 
         .attr("transform", "translate(20,50)") 
