@@ -151,7 +151,8 @@ checkboxes.append('input')
 
 checkboxes.append('label')
     .attr('for', (d, i) => `checkbox-${i}`)
-    .text(d => d);
+    .text(d => d)
+    .style('color', d => colorScale(d));
 
 
 
@@ -196,7 +197,8 @@ function handleChange() {
             .attr('stroke', colorScale(agencyData.name))
             .attr('d', line);
     });
-}
+
+  }
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
