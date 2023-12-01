@@ -16,6 +16,43 @@ function timeline(){
     svg.append("g") 
         .attr("transform", "translate(20,50)") 
         .call(timeline) 
+    
+    // create svg element:
+    var svg = d3.select("#circle1").append("svg").attr("width", 200).attr("height", 60)
+
+    // Add the path using this helper function
+    svg.append('circle')
+        .attr('cx', 50)
+        .attr('cy', 50)
+        .attr('r', 10)
+        .attr('stroke', 'black')
+        .attr('fill', '#f263df');
+
+        // create svg element:
+        var svg = d3.select("#circle2").append("svg").attr("width", 200).attr("height", 60)
+
+        // Add the path using this helper function
+        svg.append('circle')
+            .attr('cx', 50)
+            .attr('cy', 50)
+            .attr('r', 10)
+            .attr('stroke', 'black')
+            .attr('fill', '#8cffff');
+
+            
+
+        // create svg element:
+        var svg = d3.select("#circle3").append("svg").attr("width", 200).attr("height", 60)
+
+        // Add the path using this helper function
+        svg.append('circle')
+            .attr('cx', 50)
+            .attr('cy', 50)
+            .attr('r', 10)
+            .attr('stroke', 'black')
+            .attr('fill', '#c08cff');
+    
+
 
   return timeline;
 };
