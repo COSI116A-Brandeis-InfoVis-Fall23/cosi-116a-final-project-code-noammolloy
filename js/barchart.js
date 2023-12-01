@@ -1,29 +1,57 @@
 function barchart() {
     let margin = {
         top: 30,
-        left: 30,
+        left: 70,
         right: 30,
-        bottom: 35
+        bottom: 40
     };
     
-    let width = 700 - margin.left - margin.right;
-    let height = 450 - margin.top - margin.bottom;
-    let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+    let width = 600 - margin.left - margin.right;
+    let height = 500 - margin.top - margin.bottom;
+    // let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     function chart(selector, data) {
-        let barPadding = 2;
+        let barPadding = 1;
           
         // Define a time parser within the linegraph function
         const parseTime = d3.timeParse('%Y-%m-%d');
-  
+
+        /*
         data.forEach(d => {
             d['Record Date'] = parseTime(d['Record Date']);
             d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
         });
-  
-          // Group data by agency name
+        */
+
+        data.forEach(d => {
+            d['Record Date'] = new Date(d['Record Date']);
+            d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
+        });
+
+        // Group data by agency name
         const uniqueAgencies = [...new Set(data.map(item => item['Agency Name']))];
-  
+        const uniqueYears = [...new Set(data.map(item => item['Record Date']))].sort((a, b) => a - b);
+
+        const chartData = uniqueAgencies.map(agency => {
+            return {
+                name: agency,
+                values: data
+                    .filter(item => item['Agency Name'] === agency && item['Restatement Flag'] === 'Y')
+                    .map(item => ({
+                        date: item['Record Date'],
+                        cost: parseFloat(item['Gross Cost (in Billions)'])
+                    }))
+            };
+        });
+       
+        console.log(chartData);
+
+        let colorScale = d3.scaleOrdinal()
+            .domain(uniqueAgencies)
+            .range(d3.schemeCategory10);
+
+
+        /*
         const chartData = uniqueAgencies.map(agency => {
             return {
               name: agency,
@@ -35,8 +63,9 @@ function barchart() {
                 }))
             };
           });
+*/
 
-        let barWidth = (width / chartData.length);
+        // let barWidth = (width / chartData.length);
 
         let svg = d3.select(selector)
             .append('svg')
@@ -48,41 +77,98 @@ function barchart() {
             .classed('svg-content', true);
 
         // Define x and y scales
-        const xScale = d3.scaleTime()
-            .domain(d3.extent(data, d => d['Record Date']))
+
+        const xScale = d3.scaleBand()
+            .domain(uniqueYears.map(d => d.getFullYear()))
+            .range([0, width])
+            .padding(0.1);
+        /*
+        const xScale = d3.scaleBand()
+            .domain(uniqueYears.map(d => d.getFullYear()))  // assuming uniqueYears is an array of Date objects
+            .range([0, width])
+            .padding(0.1);
+        */
+        /*
+        const xScale = d3.scaleLinear() 
+            .domain([2000, 2020]) 
             .range([0, width]);
+        */
 
         const yScale = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])+500])
+            .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])])
             .range([height, 0]);
 
-
-        // Loop through each agency's data and draw a line for each
-        chartData.forEach(agencyData => {
-            svg.append('path')
-            .datum(agencyData.values.filter(d => !isNaN(d.cost))) // Filter out NaN values in 'cost'
-            .attr('fill', 'none')
-        });
-
+        // svg.selectAll("rect")
+        //     .data(chartData)
+        //     .enter()
+        //     .append("rect")
+        //     .attr("y", function(d) {
+        //     return yScale(d.values[0].cost);
+        //     })
+        //     .attr("height", function(d) { 
+        //     return height - yScale(d.values[0].cost);
+        //     })
+        //     .attr("width", barWidth - barPadding)
+        //     .style("fill", "blue")
+        //     .attr("transform", function (d, i) {
+        //     var translate = [barWidth * i, 0]; 
+        //     return "translate("+ translate +")";
+        //     });
+        
+        /*
         svg.selectAll("rect")
             .data(chartData)
             .enter()
             .append("rect")
             .attr("y", function(d) {
-            return yScale(d.values[0].cost);
-            })
-            .attr("height", function(d) { 
-            return height - yScale(d.values[0].cost);
+                return yScale(d.values[0].cost);
             })
             .attr("width", barWidth - barPadding)
-            .style("fill", "blue")
+            .attr("height", function(d) { 
+                return height - yScale(d.values[0].cost);
+            })
+            .style("fill", d => colorScale(d.name))
             .attr("transform", function (d, i) {
-            var translate = [barWidth * i, 0]; 
-            return "translate("+ translate +")";
+                var translate = [barWidth * i, 0]; 
+                return "translate("+ translate +")";
             });
-        
+        */
+
+        // Render bars
+        /*
+        chartData.forEach(agencyData => {
+            svg.selectAll("rect")
+                .data(agencyData.values)
+                .enter()
+                .append("rect")
+                .attr("x", d => xScale(d.date.getFullYear()))  // Position bars based on the year
+                .attr("y", d => yScale(d.cost))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => height - yScale(d.cost))
+                .style("fill", d => colorScale(agencyData.name));
+
+        });
+        */
+
+        // Move these lines outside the loop
+        const bars = svg.selectAll("rect")
+        .data(chartData)
+        .enter();
+
+        chartData.forEach(agencyData => {
+        // Use the `bars` selection here
+        bars.append("rect")
+            .attr("x", d => xScale(d.values[0].date.getFullYear()))  // Position bars based on the year
+            // .attr("x", d => d.date ? xScale(d.date.getFullYear()) : 0)
+            .attr("y", d => yScale(d.values[0].cost))
+            .attr("width", xScale.bandwidth())
+            .attr("height", d => height - yScale(d.values[0].cost))
+            .style("fill", d => colorScale(d.name));
+            // console.log(data.filter(d => d.date == null));
+            console.log(agencyData.values.filter(d => d.date == null));
+        });
         // Define x and y axes
-        const xAxis = d3.axisBottom(xScale);
+        const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'));
         const yAxis = d3.axisLeft(yScale);
         
         // Append x-axis to the SVG
@@ -90,7 +176,7 @@ function barchart() {
             .attr('class', 'x-axis')
             .attr('transform', `translate(0, ${height})`)
             .call(xAxis);
-
+  
         // Append y-axis to the SVG
         svg.append('g')
             .attr('class', 'y-axis')
@@ -101,11 +187,11 @@ function barchart() {
             .attr('y', 0 - (margin.top / 2))
             .attr('text-anchor', 'middle')
             .style('font-size', '16px')
-            .text('Federal Expenditures Over Time');
+            .text('Federal Expenditures by Year');
 
         // Add a label for the x-axis
         svg.append('text')
-            .attr('transform', `translate(${width / 2},${height + margin.top})`)
+            .attr('transform', `translate(${width / 2},${height + margin.bottom})`)
             .style('text-anchor', 'middle')
             .style('font-size', '14px')
             .text('Record Date');
@@ -120,6 +206,8 @@ function barchart() {
             .style('font-size', '14px')
             .text('Gross Cost (in Billions)');
 
+
+        
         chart.margin = function (_) {
             if (!arguments.length) return margin;
             margin = _;
