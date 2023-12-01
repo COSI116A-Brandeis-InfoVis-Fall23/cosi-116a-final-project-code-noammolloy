@@ -8,27 +8,16 @@ function barchart() {
     
     let width = 600 - margin.left - margin.right;
     let height = 500 - margin.top - margin.bottom;
-    // let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
 
     function chart(selector, data) {
         let barPadding = 1;
-          
-        // Define a time parser within the linegraph function
-        const parseTime = d3.timeParse('%Y-%m-%d');
-
-        /*
-        data.forEach(d => {
-            d['Record Date'] = parseTime(d['Record Date']);
-            d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
-        });
-        */
-
+        
+        // data editing/management
         data.forEach(d => {
             d['Record Date'] = new Date(d['Record Date']);
             d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
         });
 
-        // Group data by agency name
         const uniqueAgencies = [...new Set(data.map(item => item['Agency Name']))];
         const uniqueYears = [...new Set(data.map(item => item['Record Date']))].sort((a, b) => a - b);
 
@@ -46,27 +35,13 @@ function barchart() {
        
         console.log(chartData);
 
+        // sets color scheme of bars
         let colorScale = d3.scaleOrdinal()
             .domain(uniqueAgencies)
             .range(d3.schemeCategory10);
 
 
-        /*
-        const chartData = uniqueAgencies.map(agency => {
-            return {
-              name: agency,
-              values: data
-                .filter(item => item['Agency Name'] === agency && item['Restatement Flag'] === 'Y')
-                .map(item => ({
-                  date: item['Record Date'],
-                  cost: parseFloat(item['Gross Cost (in Billions)'])
-                }))
-            };
-          });
-*/
-
-        // let barWidth = (width / chartData.length);
-
+        // accesses section of page for barchart
         let svg = d3.select(selector)
             .append('svg')
             .attr('width', width + margin.left + margin.right)
@@ -76,97 +51,33 @@ function barchart() {
             .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
             .classed('svg-content', true);
 
-        // Define x and y scales
 
+        // Define x and y scales
         const xScale = d3.scaleBand()
             .domain(uniqueYears.map(d => d.getFullYear()))
             .range([0, width])
             .padding(0.1);
-        /*
-        const xScale = d3.scaleBand()
-            .domain(uniqueYears.map(d => d.getFullYear()))  // assuming uniqueYears is an array of Date objects
-            .range([0, width])
-            .padding(0.1);
-        */
-        /*
-        const xScale = d3.scaleLinear() 
-            .domain([2000, 2020]) 
-            .range([0, width]);
-        */
-
+        
         const yScale = d3.scaleLinear()
             .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])])
             .range([height, 0]);
 
-        // svg.selectAll("rect")
-        //     .data(chartData)
-        //     .enter()
-        //     .append("rect")
-        //     .attr("y", function(d) {
-        //     return yScale(d.values[0].cost);
-        //     })
-        //     .attr("height", function(d) { 
-        //     return height - yScale(d.values[0].cost);
-        //     })
-        //     .attr("width", barWidth - barPadding)
-        //     .style("fill", "blue")
-        //     .attr("transform", function (d, i) {
-        //     var translate = [barWidth * i, 0]; 
-        //     return "translate("+ translate +")";
-        //     });
-        
-        /*
-        svg.selectAll("rect")
-            .data(chartData)
-            .enter()
-            .append("rect")
-            .attr("y", function(d) {
-                return yScale(d.values[0].cost);
-            })
-            .attr("width", barWidth - barPadding)
-            .attr("height", function(d) { 
-                return height - yScale(d.values[0].cost);
-            })
-            .style("fill", d => colorScale(d.name))
-            .attr("transform", function (d, i) {
-                var translate = [barWidth * i, 0]; 
-                return "translate("+ translate +")";
-            });
-        */
 
-        // Render bars
-        /*
-        chartData.forEach(agencyData => {
-            svg.selectAll("rect")
-                .data(agencyData.values)
-                .enter()
-                .append("rect")
-                .attr("x", d => xScale(d.date.getFullYear()))  // Position bars based on the year
-                .attr("y", d => yScale(d.cost))
-                .attr("width", xScale.bandwidth())
-                .attr("height", d => height - yScale(d.cost))
-                .style("fill", d => colorScale(agencyData.name));
-
-        });
-        */
-
-        // Move these lines outside the loop
         const bars = svg.selectAll("rect")
-        .data(chartData)
-        .enter();
-
+            .data(chartData)
+            .enter();
         chartData.forEach(agencyData => {
-        // Use the `bars` selection here
-        bars.append("rect")
-            .attr("x", d => xScale(d.values[0].date.getFullYear()))  // Position bars based on the year
-            // .attr("x", d => d.date ? xScale(d.date.getFullYear()) : 0)
-            .attr("y", d => yScale(d.values[0].cost))
-            .attr("width", xScale.bandwidth())
-            .attr("height", d => height - yScale(d.values[0].cost))
-            .style("fill", d => colorScale(d.name));
-            // console.log(data.filter(d => d.date == null));
-            console.log(agencyData.values.filter(d => d.date == null));
+            // Use the `bars` selection to add more
+            bars.append("rect")
+                .attr("x", d => xScale(d.values[0].date.getFullYear()))  // Position bars based on the year
+                // .attr("x", d => d.date ? xScale(d.date.getFullYear()) : 0)
+                .attr("y", d => yScale(d.values[0].cost))
+                .attr("width", xScale.bandwidth())
+                .attr("height", d => height - yScale(d.values[0].cost))
+                .style("fill", d => colorScale(d.name));
+                console.log(agencyData.values.filter(d => d.date == null));
         });
+        
         // Define x and y axes
         const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'));
         const yAxis = d3.axisLeft(yScale);
