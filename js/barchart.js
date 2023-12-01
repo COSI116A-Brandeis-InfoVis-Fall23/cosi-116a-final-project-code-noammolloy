@@ -6,7 +6,7 @@ function barchart() {
         bottom: 40
     };
     
-    let width = 600 - margin.left - margin.right;
+    let width = 700 - margin.left - margin.right;
     let height = 500 - margin.top - margin.bottom;
 
     function chart(selector, data) {
@@ -32,14 +32,16 @@ function barchart() {
                     }))
             };
         });
-       
-        console.log(chartData);
 
-        // sets color scheme of bars
-        let colorScale = d3.scaleOrdinal()
-            .domain(uniqueAgencies)
-            .range(d3.schemeCategory10);
 
+// Use a different identifier if needed
+const colorScale = d3.scaleOrdinal()
+    // .domain(uniqueAgencies.map((agency, index) => `${agency}-${index}`))
+    .domain(uniqueAgencies.map((agency, index) => `${agency}`))
+    .range(d3.schemeCategory10);
+// Log unique agencies and color scale domain
+console.log('Unique Agencies:', uniqueAgencies);
+console.log('Color Scale Domain:', colorScale.domain());
 
         // accesses section of page for barchart
         let svg = d3.select(selector)
@@ -54,30 +56,62 @@ function barchart() {
 
         // Define x and y scales
         const xScale = d3.scaleBand()
+            // .domain(chartData.length)
             .domain(uniqueYears.map(d => d.getFullYear()))
             .range([0, width])
             .padding(0.1);
+
         
         const yScale = d3.scaleLinear()
             .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])])
             .range([height, 0]);
 
+        console.log("Chart Data: ", chartData);
 
-        const bars = svg.selectAll("rect")
-            .data(chartData)
-            .enter();
-        chartData.forEach(agencyData => {
-            // Use the `bars` selection to add more
-            bars.append("rect")
-                .attr("x", d => xScale(d.values[0].date.getFullYear()))  // Position bars based on the year
-                // .attr("x", d => d.date ? xScale(d.date.getFullYear()) : 0)
-                .attr("y", d => yScale(d.values[0].cost))
-                .attr("width", xScale.bandwidth())
-                .attr("height", d => height - yScale(d.values[0].cost))
-                .style("fill", d => colorScale(d.name));
-                console.log(agencyData.values.filter(d => d.date == null));
-        });
-        
+const bars = svg.selectAll(".bar-group")
+    .data(chartData)
+    .enter()
+    .append("g")
+    .attr("class", "bar-group")
+    .attr("transform", d => {
+        const xTranslation = xScale(d.values[0].date.getFullYear());
+        return isNaN(xTranslation) ? "translate(0,0)" : `translate(${xTranslation}, 0)`;
+    });
+
+console.log(chartData)
+console.log('Color Scale Domain:', colorScale.domain());
+
+// Use the `bars` selection to add more rectangles
+bars.selectAll("rect")
+    .data(d => d.values)
+    .enter()
+    .append("rect")
+    .attr("x", d => {
+    if (d.values && d.values.length > 0 && d.values[0].date) {
+        return xScale(d.values[0].date.getFullYear());
+    } else {
+        return 0; 
+    }
+})
+.attr("y", d => {
+    if (!isNaN(d.cost)) {
+        return yScale(d.cost);
+    } else {
+        return 0;
+    }
+})
+.attr("height", d => {
+    const barHeight = height - yScale(d.cost);
+    return !isNaN(barHeight) ? Math.max(0, barHeight) : 0;
+})
+.attr("width", xScale.bandwidth())
+.style("fill", d => colorScale(d3.map(d.values, v => v.name).keys()[0]))  
+
+.on("mouseover", function (event, d) {
+        console.log("Hovered Rectangle Data:", chartData[d]);
+        console.log("Data:", d);
+        console.log("Name:", chartData[d].name);
+});
         // Define x and y axes
         const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'));
         const yAxis = d3.axisLeft(yScale);
@@ -118,7 +152,6 @@ function barchart() {
             .text('Gross Cost (in Billions)');
 
 
-        
         chart.margin = function (_) {
             if (!arguments.length) return margin;
             margin = _;
