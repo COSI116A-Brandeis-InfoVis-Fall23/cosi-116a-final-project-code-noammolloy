@@ -1,6 +1,6 @@
 function timeline(){
 
-    var width = 900
+    var width = 985
     var height = 20; 
     var svg = d3.select("#tl") 
         .append("svg") 
@@ -8,7 +8,7 @@ function timeline(){
         .attr("height", height); 
 
     var scale = d3.scaleLinear() 
-        .domain([2000, 2020]) 
+        .domain([2000, 2022]) 
         .range([0, width - 50]); 
 
     var timeline = d3.axisBottom(scale).tickFormat(d3.format("d"));
@@ -44,6 +44,22 @@ function timeline(){
         .attr('r', 10)
         .attr('stroke', 'black')
         .attr('fill', '#c08cff');
+
+        svg.append('rect') //Russo-Ukraine War
+            .attr("x", 965)
+            .attr("y", 0)
+            .attr("width", 20)
+            .attr("height", 20)
+            .attr('stroke', 'black')
+            .attr('fill', '#46bdc6');
+
+        svg.append('rect') //Russo-Ukraine War (hide line to show it's still going)
+            .attr("x", 966)
+            .attr("y", .5)
+            .attr("width", 20)
+            .attr("height", 19)
+            .attr('fill', '#46bdc6');
+
 
         // create svg element:
         var svg = d3.select("#circle2").append("svg").attr("width", 1000).attr("height", 40)
@@ -95,15 +111,15 @@ function timeline(){
         svg.append('rect') //Chinese property crisis
             .attr("x", 880)
             .attr("y", 0)
-            .attr("width", 20)
+            .attr("width", 105)
             .attr("height", 20)
             .attr('stroke', 'black')
             .attr('fill', '#ff9366');
 
-        svg.append('rect') //Chinese property crisis
+        svg.append('rect') //Chinese property crisis 
             .attr("x", 881)
             .attr("y", 1)
-            .attr("width", 20)
+            .attr("width", 105)
             .attr("height", 18)
             .attr('fill', '#ff9366');
 
@@ -118,6 +134,8 @@ function timeline(){
             .attr("height", 20)
             .attr('stroke', 'black')
             .attr('fill', '#de52c9');
+
+        
     
 
 
