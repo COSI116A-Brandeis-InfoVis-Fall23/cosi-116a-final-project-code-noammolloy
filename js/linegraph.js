@@ -173,20 +173,43 @@ function handleChange() {
     console.log('Selected Departments:', selectedDepartments);
   }
   // clears and redraws graph with new parameters
-  function updateGraph(selectedDepartments) {
+  function updateGraph(selectedDepartments, selectedYears = []) {
     svg.selectAll('.line').remove();
-    const filteredData = lineChartData
-        .filter(agencyData => selectedDepartments.includes(agencyData.name))
-        .map(agencyData => agencyData.values.filter(d => !isNaN(d.cost)))
-        .flat();
+    
+    // Filter data based on selected departments and optional selected years
+    const filteredData = lineChartData.filter(agencyData =>
+        selectedDepartments.includes(agencyData.name)
+        && (selectedYears.length === 0 || agencyData.values.some(d => selectedYears.includes(d.year))) // Filter only if years are provided
+    );
 
-    // Get the maximum cost value from the selected data
-    const maxCost = d3.max(filteredData, d => d.cost);
+    // Extract all x values from the selected departments within selected years (if provided)
+    const allXValues = filteredData.flatMap(agencyData =>
+        agencyData.values
+            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.year))
+            .map(d => d.x) // Assuming 'x' is the property for x-axis values
+    );
 
-    // Update yScale domain based on the maximum cost value
-    yScale.domain([0, maxCost]);
+    // Extract all y values from the selected departments within selected years (if provided)
+    const allYValues = filteredData.flatMap(agencyData =>
+        agencyData.values
+            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.year))
+            .map(d => !isNaN(d.cost) ? d.cost : 0) // Assuming 'cost' is the property for y-axis values
+    );
 
-    // Update y-axis with the new scale
+    // Get the maximum x and y values from the selected data
+    const maxX = d3.max(allXValues);
+    const maxY = d3.max(allYValues);
+
+    // Update xScale and yScale domains based on the maximum values
+    xScale.domain([0, maxX]);
+    yScale.domain([0, maxY]);
+
+    // Update x and y axes with the new scales
+    svg.select('.x-axis')
+        .transition()
+        .duration(500)
+        .call(xAxis);
+
     svg.select('.y-axis')
         .transition()
         .duration(500)
@@ -195,17 +218,19 @@ function handleChange() {
     // Clear existing graph
     svg.selectAll('path').remove();
 
-    // Draw lines for the selected departments
-    lineChartData.forEach(agencyData => {
-        if (selectedDepartments.includes(agencyData.name)) {
-            svg.append('path')
-                .datum(agencyData.values.filter(d => !isNaN(d.cost)))
-                .attr('fill', 'none')
-                .attr('stroke', colorScale(agencyData.name))
-                .attr('d', line);
-        }
+    // Draw lines for the selected departments within selected years (if provided)
+    filteredData.forEach(agencyData => {
+        const filteredValues = agencyData.values.filter(d =>
+            selectedDepartments.includes(agencyData.name) && (selectedYears.length === 0 || selectedYears.includes(d.year))
+        );
+        svg.append('path')
+            .datum(filteredValues)
+            .attr('fill', 'none')
+            .attr('stroke', colorScale(agencyData.name))
+            .attr('d', line);
     });
 }
+
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
