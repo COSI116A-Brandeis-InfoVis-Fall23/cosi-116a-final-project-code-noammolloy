@@ -28,26 +28,27 @@ function linegraph() {
   
 
         const brush = d3.brushX()
-        .extent([[0, 0], [width, height]])
-        .on("end", brushed);
+  .extent([[0, 0], [width, height]])
+  .on("end", function() {
+    const event = d3.event;
+    if (!event || !event.selection) return;
 
-    // Append brush to the SVG
-    svg.append("g")
-        .attr("class", "brush")
-        .call(brush);
+    const [x0, x1] = event.selection.map(xScale.invert);
 
-    // Function to handle brushing
-    function brushed(event) {
-        if (!event.selection) return;
+    // Filter data within the brushed range
+    const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
 
-        const [x0, x1] = event.selection.map(xScale.invert);
+    // console.log("Brushed Data:", brushedData);
 
-        // Filter data within the brushed range
-        const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
+    // Update other visualizations (e.g., bar chart)
+    // updateBarChart(brushedData);
+  });
 
-        // Update other visualizations (e.g., bar chart)
-        updateBarChart(brushedData);
-    }
+// Append brush to the SVG
+svg.append("g")
+    .attr("class", "brush")
+    .call(brush);
+
       // Group data by agency name
       const uniqueAgencies = [...new Set(data.map(item => item['Agency Name']))];
   
@@ -175,21 +176,36 @@ function handleChange() {
   function updateGraph(selectedDepartments) {
     svg.selectAll('.line').remove();
     const filteredData = lineChartData
-        .filter(agencyData => selectedDepartments.includes(agencyData.name));
+        .filter(agencyData => selectedDepartments.includes(agencyData.name))
+        .map(agencyData => agencyData.values.filter(d => !isNaN(d.cost)))
+        .flat();
+
+    // Get the maximum cost value from the selected data
+    const maxCost = d3.max(filteredData, d => d.cost);
+
+    // Update yScale domain based on the maximum cost value
+    yScale.domain([0, maxCost]);
+
+    // Update y-axis with the new scale
+    svg.select('.y-axis')
+        .transition()
+        .duration(500)
+        .call(yAxis);
 
     // Clear existing graph
     svg.selectAll('path').remove();
 
     // Draw lines for the selected departments
-    filteredData.forEach(agencyData => {
-        svg.append('path')
-            .datum(agencyData.values.filter(d => !isNaN(d.cost)))
-            .attr('fill', 'none')
-            .attr('stroke', colorScale(agencyData.name))
-            .attr('d', line);
+    lineChartData.forEach(agencyData => {
+        if (selectedDepartments.includes(agencyData.name)) {
+            svg.append('path')
+                .datum(agencyData.values.filter(d => !isNaN(d.cost)))
+                .attr('fill', 'none')
+                .attr('stroke', colorScale(agencyData.name))
+                .attr('d', line);
+        }
     });
-
-  }
+}
 
 chart.margin = function (_) {
     if (!arguments.length) return margin;
