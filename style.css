@@ -156,3 +156,12 @@ input[type="range"]:hover::-webkit-slider-thumb {
   .checkbox label {
 	font-size: 10px;
   }
+  #linegraph {
+    width: 75vw; /* 25% of the viewport width */
+    height: 75vh; /* 25% of the viewport height */
+  }
+  
+  #barchart {
+    width: 75vw; /* 25% of the viewport width */
+    height: 75vh; /* 25% of the viewport height */
+  }

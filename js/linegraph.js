@@ -26,6 +26,28 @@ function linegraph() {
       svg = svg.append('g')
         .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
   
+
+        const brush = d3.brushX()
+        .extent([[0, 0], [width, height]])
+        .on("end", brushed);
+
+    // Append brush to the SVG
+    svg.append("g")
+        .attr("class", "brush")
+        .call(brush);
+
+    // Function to handle brushing
+    function brushed(event) {
+        if (!event.selection) return;
+
+        const [x0, x1] = event.selection.map(xScale.invert);
+
+        // Filter data within the brushed range
+        const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
+
+        // Update other visualizations (e.g., bar chart)
+        updateBarChart(brushedData);
+    }
       // Group data by agency name
       const uniqueAgencies = [...new Set(data.map(item => item['Agency Name']))];
   
