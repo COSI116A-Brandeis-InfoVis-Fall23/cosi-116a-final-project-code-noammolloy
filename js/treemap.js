@@ -37,7 +37,7 @@ function treemap() {
     createVisual();
 
     function createVisual() {
-
+      
       svg.selectAll("rect").remove();
       svg.selectAll("foreignObject").remove();
 

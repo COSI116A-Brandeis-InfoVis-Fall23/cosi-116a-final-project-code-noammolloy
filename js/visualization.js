@@ -7,19 +7,20 @@
 
         const dispatchString = "selectionUpdated";
 
-        const yearSlider = d3.select("#year-slider")
+        let yearSlider = yearslider()
+          .min(2000)
+          .max(2021)
+          .step(1)
+          .selectionDispatcher(d3.dispatch(dispatchString))
+          ("#year-slider-holder")
         
         let tmDepExp = treemap()
           .value(d => +d["Gross Cost (in Billions)"])
           .label(d => d["Agency Name"])
-          .selectedYear(yearSlider.property("value"))
+          .selectedYear("2021")
           .selectionDispatcher(d3.dispatch(dispatchString))
           ("#treemap", fedExpData)
         
-        yearSlider.on("input", function() {
-          tmDepExp.updateSelection(this.value);
-        });
-
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
         
@@ -27,6 +28,9 @@
           ("#barchart", fedExpData);
 
 
+        yearSlider.selectionDispatcher().on(dispatchString, function(value) {
+          tmDepExp.updateSelection(value);
+        });
 
       });
     });

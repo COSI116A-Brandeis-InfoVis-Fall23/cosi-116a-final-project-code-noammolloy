@@ -127,7 +127,8 @@
       preserveAspectRatio="xMidYMid meet" class="marks" viewBox="0 0 821 520"></svg>
     </div>
 
-    <input id="year-slider" type="range" min="2000" max="2021" step="1" value="2021">
+    <!-- <input id="year-slider" type="range" min="2000" max="2021" step="1" value="2021"> -->
+    <div id="year-slider-holder"></div>
     <br><br><br>
 
     <div class="linegraph-holder">
@@ -245,6 +246,7 @@
   
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v4/d3.v4.js"></script>
+  <script src="js/yearslider.js"></script>
   <script src="js/treemap.js"></script>
   <script src="js/barchart.js"></script>
   <script src="js/linegraph.js"></script>

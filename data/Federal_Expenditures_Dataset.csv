@@ -1009,8 +1009,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2010-09-30,2010,N,Export-Import Bank of the United States,0.4,0.7,null,null,-0.3,2010,2010
 2010-09-30,2010,N,Farm Credit System Insurance Corporation,null,0.1,null,null,-0.1,2010,2010
 2010-09-30,2010,N,All other entities,47.3,0.7,null,null,46.6,2010,2010
-2010-09-30,2010,N,Subtotal before loss/(gain) from changes in assumptions in 2010,4472.3,309.2,null,null,4163.1,2010,2010
-2010-09-30,2010,N,Subtotal of loss/(gain) from changes in assumptions,132.9,null,null,null,132.9,2010,2010
 2010-09-30,2010,N,Total,4605.2,309.2,null,null,4296,2010,2010
 2010-09-30,2009,Y,Department of Defense,718.4,35.6,null,null,682.8,2010,2010
 2010-09-30,2009,Y,Department of Health and Human Services,866.4,59.5,null,null,806.9,2010,2010
@@ -1049,8 +1047,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2010-09-30,2009,Y,Export-Import Bank of the United States,1.5,0.8,null,null,0.7,2010,2010
 2010-09-30,2009,Y,Farm Credit System Insurance Corporation,null,0.3,null,null,-0.3,2010,2010
 2010-09-30,2009,Y,All other entities,51.3,0.7,null,null,50.6,2010,2010
-2010-09-30,2009,Y,Subtotal before loss/(gain) from changes in assumptions in 2010,3735.6,300.9,null,null,3434.7,2010,2010
-2010-09-30,2009,Y,Subtotal of loss/(gain) from changes in assumptions,null,null,null,null,null,2010,2010
 2010-09-30,2009,Y,Total,3735.6,300.9,null,null,3434.7,2010,2010
 2009-09-30,2009,N,Department of Health and Human Services,866.4,59.5,null,null,806.9,2009,2009
 2009-09-30,2009,N,Social Security Administration,736.6,0.4,null,null,736.2,2009,2009
