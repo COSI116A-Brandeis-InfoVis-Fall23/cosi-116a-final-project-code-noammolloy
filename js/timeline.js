@@ -239,6 +239,3 @@ function timeline(data){
 
 
 timeline();
-
-
-timeline();
