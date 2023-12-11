@@ -7,6 +7,8 @@
 
         const dispatchString = "selectionUpdated";
 
+        
+
         let yearSlider = yearslider()
           .min(2000)
           .max(2021)
@@ -24,13 +26,9 @@
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
 
-          let barLucas = createBarChart('#barchartLucas');
-          barLucas(fedExpData);          
+          let barchart = createBarChart('#barchart', lgDepExp.colorScale(), fedExpData);
+          barchart(fedExpData);          
         
-        let bar = barchart()
-          ("#barchart", fedExpData);
-
-
         yearSlider.selectionDispatcher().on(dispatchString, function(value) {
           tmDepExp.updateSelection(value);
         });
