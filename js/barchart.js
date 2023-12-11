@@ -1,203 +1,96 @@
-function barchart() {
-    let margin = {
-        top: 30,
-        left: 70,
-        right: 30,
-        bottom: 40
-    };
-    
-    let width = 700 - margin.left - margin.right;
-    let height = 500 - margin.top - margin.bottom;
-
-    function chart(selector, data) {
-        let barPadding = 1;
-        
-        // data editing/management
-        data.forEach(d => {
-            d['Record Date'] = new Date(d['Record Date']);
-            d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
-        });
-
-        const uniqueAgencies = [...new Set(data.map(item => item['Agency Name']))];
-        const uniqueYears = [...new Set(data.map(item => item['Record Date']))].sort((a, b) => a - b);
-
-        const chartData = uniqueAgencies.map(agency => {
-            return {
-                name: agency,
-                values: data
-                    .filter(item => item['Agency Name'] === agency && item['Restatement Flag'] === 'Y')
-                    .map(item => ({
-                        date: item['Record Date'],
-                        cost: parseFloat(item['Gross Cost (in Billions)'])
-                    }))
-            };
-        });
-
-
-// Use a different identifier if needed
-const colorScale = d3.scaleOrdinal()
-    // .domain(uniqueAgencies.map((agency, index) => `${agency}-${index}`))
-    .domain(uniqueAgencies.map((agency, index) => `${agency}`))
-    .range(d3.schemeCategory10);
-// Log unique agencies and color scale domain
-console.log('Unique Agencies:', uniqueAgencies);
-console.log('Color Scale Domain:', colorScale.domain());
-
-        // accesses section of page for barchart
-        let svg = d3.select(selector)
-            .append('svg')
-            .attr('width', width + margin.left + margin.right)
-            .attr('height', height + margin.top + margin.bottom)
-            .append('g')
-            .attr('viewBox', [0, 0, width + margin.left + margin.right, height + margin.top + margin.bottom].join(' '))
-            .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
-            .classed('svg-content', true);
-
-
-        // Define x and y scales
-        const xScale = d3.scaleBand()
-            // .domain(chartData.length)
-            .domain(uniqueYears.map(d => d.getFullYear()))
-            .range([0, width])
-            .padding(0.1);
-
-        
-        const yScale = d3.scaleLinear()
-            .domain([0, d3.max(data, d => d['Gross Cost (in Billions)'])])
-            .range([height, 0]);
-
-        console.log("Chart Data: ", chartData);
-
-const bars = svg.selectAll(".bar-group")
-    .data(chartData)
-    .enter()
-    .append("g")
-    .attr("class", "bar-group")
-    .attr("transform", d => {
-        const xTranslation = xScale(d.values[0].date.getFullYear());
-        return isNaN(xTranslation) ? "translate(0,0)" : `translate(${xTranslation}, 0)`;
-    });
-
-console.log(chartData)
-console.log('Color Scale Domain:', colorScale.domain());
-
-// Use the `bars` selection to add more rectangles
-bars.selectAll("rect")
-    .data(d => d.values)
-    .enter()
-    .append("rect")
-    .attr("x", d => {
-    if (d.values && d.values.length > 0 && d.values[0].date) {
-        return xScale(d.values[0].date.getFullYear());
-    } else {
-        return 0; 
-    }
-})
-.attr("y", d => {
-    if (!isNaN(d.cost)) {
-        return yScale(d.cost);
-    } else {
-        return 0;
-    }
-})
-.attr("height", d => {
-    const barHeight = height - yScale(d.cost);
-    return !isNaN(barHeight) ? Math.max(0, barHeight) : 0;
-})
-.attr("width", xScale.bandwidth())
-.style("fill", d => colorScale(d3.map(d.values, v => v.name).keys()[0]))  
-
-.on("mouseover", function (event, d) {
-        console.log("Hovered Rectangle Data:", chartData[d]);
-        console.log("Data:", d);
-        console.log("Name:", chartData[d].name);
-});
-        // Define x and y axes
-        const xAxis = d3.axisBottom(xScale).tickFormat(d3.format('d'));
-        const yAxis = d3.axisLeft(yScale);
-        
-        // Append x-axis to the SVG
-        svg.append('g')
-            .attr('class', 'x-axis')
-            .attr('transform', `translate(0, ${height})`)
-            .call(xAxis);
+function createBarChart(selector) {
+    // Define dimensions and margins for the chart
+    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const width = 600 - margin.left - margin.right;
+    const height = 400 - margin.top - margin.bottom;
   
-        // Append y-axis to the SVG
-        svg.append('g')
-            .attr('class', 'y-axis')
-            .call(yAxis);
-
-        svg.append('text')
-            .attr('x', width / 2)
-            .attr('y', 0 - (margin.top / 2))
-            .attr('text-anchor', 'middle')
-            .style('font-size', '16px')
-            .text('Federal Expenditures by Year');
-
-        // Add a label for the x-axis
-        svg.append('text')
-            .attr('transform', `translate(${width / 2},${height + margin.bottom})`)
-            .style('text-anchor', 'middle')
-            .style('font-size', '14px')
-            .text('Record Date');
-
-        // Add a label for the y-axis
-        svg.append('text')
-            .attr('transform', 'rotate(-90)')
-            .attr('y', 0 - margin.left)
-            .attr('x', 0 - (height / 2))
-            .attr('dy', '1em')
-            .style('text-anchor', 'middle')
-            .style('font-size', '14px')
-            .text('Gross Cost (in Billions)');
-
-
-        chart.margin = function (_) {
-            if (!arguments.length) return margin;
-            margin = _;
-            return chart;
-        };
-
-        chart.width = function (_) {
-            if (!arguments.length) return width;
-            width = _;
-            return chart;
-        };
-
-        chart.height = function (_) {
-            if (!arguments.length) return height;
-            height = _;
-            return chart;
-        };
-
-        chart.value = function (_) {
-            if (!arguments.length) return value;
-            value = _;
-            return chart;
-        };
-
-        chart.label = function (_) {
-            if (!arguments.length) return label;
-            label = _;
-            return chart;
-        };
-
-        chart.selectionDispatcher = function (_) {
-            if (!arguments.length) return dispatcher;
-            dispatcher = _;
-            return chart;
-        };
-
-        chart.updateSelection = function (selectedData) {
-            if (!arguments.length) return;
-            selectableElements.classed("selected", d => {
-                return selectedData.includes(d.data)
-            });
-        };
+    // Create an SVG element
+    const svg = d3.select(selector)
+      .append("svg")
+      .attr("width", width + margin.left + margin.right)
+      .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+      .attr("transform", `translate(${margin.left},${margin.top})`);
   
-        return chart;
+    // Define your scales (x and y scales)
+    const x = d3.scaleBand().rangeRound([0, width]).padding(.9);
+    const y = d3.scaleLinear().rangeRound([height, 0]);
+  
+    // Define X and Y axes
+    const xAxis = d3.axisBottom().scale(x);
+    const yAxis = d3.axisLeft().scale(y).ticks(10);
+  
+    // Function to update the chart based on data
+    function updateChart(data) {
+      // Update domains for x and y scales based on your data
+      const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
+      data.reverse();
+      data = data.filter(d => d["Agency Name"] !== "Total");
+      data = data.filter(d => !isNaN(d['Gross Cost (in Billions)']));
+      data = data.filter(d => d['Gross Cost (in Billions)'] >= 0);
+  
+      data.forEach(d => {
+        if (d['Record Date'] && parseTime(d['Record Date'])) {
+          d['Record Date'] = parseTime(d['Record Date']);
+          d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
+        } 
+      //   else {
+      //     console.error("Invalid 'Record Date' found:", d['Record Date']);
+      //   }
+      });
+  
+      // Extract unique years from your data
+      const uniqueYears = Array.from(new Set(data.map(d => d['Record Date'].getFullYear())));
+  
+      // Group data by year and then by department
+      const nestedData = d3.group(data, d => d['Record Date'].getFullYear());
+  
+      // Extract unique departments from your data
+      const uniqueDepartments = Array.from(new Set(data.map(d => d['Department'])));
+  
+      // Update the x-axis domain with unique years
+      x.domain(uniqueYears);
+      y.domain([0, d3.max(data, d => +d['Gross Cost (in Billions)'])]);
+  
+  
+      // Draw X axis with ticks for each unique year
+      svg.append("g")
+        .attr("transform", `translate(0, ${height})`)
+        .call(xAxis.tickValues(uniqueYears))
+        .selectAll(".tick text")
+        .style("text-anchor", "end")
+        .attr("dx", "-.8em")
+        .attr("dy", ".15em")
+        .attr("transform", "rotate(-45)");
+  
+      // Draw Y axis with updated scale
+      svg.append("g")
+        .call(yAxis)
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", 6)
+        .attr("dy", "0.71em")
+        .attr("text-anchor", "end")
+        .text("Gross Cost (in Billions)");
+  
+      // Draw bars based on the grouped data
+      svg.selectAll(".year-group")
+        .data(Array.from(nestedData))
+        .enter().append("g")
+        .attr("class", "year-group")
+        .attr("transform", d => `translate(${x(d[0])},0)`)
+        .selectAll(".bar")
+        .data(d => d[1])
+        .enter().append("rect")
+        .attr("class", "bar")
+        .attr("x", (d, i) => x.bandwidth() / uniqueDepartments.length * i)
+        .attr("y", d => y(+d['Gross Cost (in Billions)']))
+        .attr("height", d => height - y(+d['Gross Cost (in Billions)']))
+        .attr("width", x.bandwidth() / uniqueDepartments.length * 0.8)
+        .style("fill", "steelblue"); // Change colors as needed
     }
   
-    return chart;
+    // Return the function to update the chart
+    return updateChart;
   }
   

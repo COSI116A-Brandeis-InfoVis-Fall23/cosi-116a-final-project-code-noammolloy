@@ -24,13 +24,9 @@
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
 
-          let barLucas = createBarChart('#barchartLucas');
-          barLucas(fedExpData);          
+          let barchart = createBarChart('#barchart');
+          barchart(fedExpData);          
         
-        let bar = barchart()
-          ("#barchart", fedExpData);
-
-
         yearSlider.selectionDispatcher().on(dispatchString, function(value) {
           tmDepExp.updateSelection(value);
         });
