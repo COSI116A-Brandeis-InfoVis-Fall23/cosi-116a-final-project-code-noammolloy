@@ -182,7 +182,6 @@ bars.selectAll("rect")
             return chart;
         };
 
-
         chart.selectionDispatcher = function (_) {
             if (!arguments.length) return dispatcher;
             dispatcher = _;

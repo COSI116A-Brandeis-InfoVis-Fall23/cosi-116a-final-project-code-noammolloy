@@ -25,6 +25,8 @@ function createBarChart(selector) {
     function updateChart(data) {
       // Update domains for x and y scales based on your data
       const parseTime = d3.timeParse("%Y-%m-%d"); // Change the date format according to your data
+      data.reverse()
+      data = data.filter(d => d["Agency Name"] !== "Total");
       data = data.filter(d => !isNaN(d['Gross Cost (in Billions)']));
       data = data.filter(d => d['Gross Cost (in Billions)'] >= 0);
 
