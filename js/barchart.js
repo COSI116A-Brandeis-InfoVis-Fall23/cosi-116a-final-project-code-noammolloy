@@ -1,8 +1,13 @@
-function createBarChart(selector, colorScale, data) {
-    // Define dimensions and margins for the chart
-    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    const width = 900 - margin.left - margin.right;
-    const height = 400 - margin.top - margin.bottom;
+function barchart() {
+
+  // Define dimensions and margins for the chart
+  const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+  const width = 900 - margin.left - margin.right;
+  const height = 400 - margin.top - margin.bottom;
+  let dispatcher;
+
+
+  function createBarChart(selector, colorScale, data) {
   
     // Create an SVG element
     const svg = d3.select(selector)
@@ -43,13 +48,16 @@ function createBarChart(selector, colorScale, data) {
         console.log("Brushed Data:", brushedData);
     
         // Update other visualizations (e.g., bar chart)
-        updateGraph(brushedData);
+        // updateGraph(brushedData);
+        let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+        dispatcher.call(dispatchString, this, this.value);
+
     }
     
 
-const brushG = svg.append("g")
-    .attr("class", "brush")
-    .call(brush);
+    const brushG = svg.append("g")
+      .attr("class", "brush")
+      .call(brush);
 
     
     // Function to update the chart based on data
@@ -125,4 +133,16 @@ const brushG = svg.append("g")
     // Return the function to update the chart
     return updateChart;
   }
-  
+
+  updateChart.selectionDispatcher = function (_) {
+    if (!arguments.length) return dispatcher;
+    dispatcher = _;
+    return updateChart;
+  };
+
+  updateChart.updateSelection = function (selectedData) {
+    if (!arguments.length) return;
+    brushedData = selectedData;
+  };
+
+}

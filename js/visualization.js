@@ -24,10 +24,12 @@
           ("#treemap", fedExpData)
         
         let lgDepExp = linegraph()
+          .selectionDispatcher(d3.dispatch(dispatchString))
           ('#linegraph', fedExpData);
 
-          let barchart = createBarChart('#barchart', lgDepExp.colorScale(), fedExpData);
-          barchart(fedExpData);          
+          let barchart = barchart()
+            .selectionDispatcher(d3.dispatch(dispatchString))
+            ('#barchart', lgDepExp.colorScale(), fedExpData);
         
         yearSlider.selectionDispatcher().on(dispatchString, function(value) {
           tmDepExp.updateSelection(value);
