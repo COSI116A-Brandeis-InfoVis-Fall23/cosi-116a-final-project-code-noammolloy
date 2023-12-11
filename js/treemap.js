@@ -37,7 +37,7 @@ function treemap() {
     createVisual();
 
     function createVisual() {
-      
+
       svg.selectAll("rect").remove();
       svg.selectAll("foreignObject").remove();
 
@@ -49,7 +49,7 @@ function treemap() {
         );
 
       
-      // first formats to hierarchical structure
+      // converts to hierarchical structure
       let root = d3.hierarchy({ values: d3.nest().key(d => d["Statement Fiscal Year"]).entries(filteredData) }, d => d.values)
         .sum(d => +d["Gross Cost (in Billions)"]) // using sum for the case that we might want to show data for all years grouped into one treemap
         .sort((a, b) => b.value - a.value);
@@ -71,10 +71,10 @@ function treemap() {
         .attr("y", d => d.y0)
         .attr("width", d => d.x1 - d.x0)
         .attr("height", d => d.y1 - d.y0)
-        .attr("fill", d => colorScale(d.data["Agency Name"]));
+        .attr("fill", d => colorScale(d.data["Agency Name"])); // sets colors based on agency
 
       // adds department labels
-      let labels = svg.selectAll("foreignObject")
+      let labels = svg.selectAll("foreignObject") // using a "foreign object" so I can put a div inside
         .data(root.leaves())
         .enter()
         .append("foreignObject")
@@ -92,6 +92,7 @@ function treemap() {
         .text(d => label(d.data))
         .style("cursor", "default");
         
+      // label on top of the treemap
       svg.select("#yearLabel")
         .text(`For Fiscal Year ${selectedYear}`);
 
