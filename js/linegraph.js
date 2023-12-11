@@ -41,7 +41,7 @@ function linegraph() {
     console.log("Brushed Data:", brushedData);
 
     // Update other visualizations (e.g., bar chart)
-    // updateBarChart(brushedData);
+    updateChart(brushedData);
     // updateGraph(selectedDepartments = "Department of Veterans Affairs", brushedData)
   });
 
