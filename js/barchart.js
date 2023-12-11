@@ -1,7 +1,7 @@
-function createBarChart(selector) {
+function createBarChart(selector, colorScale, data) {
     // Define dimensions and margins for the chart
     const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-    const width = 600 - margin.left - margin.right;
+    const width = 900 - margin.left - margin.right;
     const height = 400 - margin.top - margin.bottom;
   
     // Create an SVG element
@@ -15,11 +15,43 @@ function createBarChart(selector) {
     // Define your scales (x and y scales)
     const x = d3.scaleBand().rangeRound([0, width]).padding(.9);
     const y = d3.scaleLinear().rangeRound([height, 0]);
-  
-    // Define X and Y axes
     const xAxis = d3.axisBottom().scale(x);
     const yAxis = d3.axisLeft().scale(y).ticks(10);
-  
+    
+    const brush = d3.brushX()
+    .extent([[0, 0], [width, height]])
+    .on("end", brushed);
+
+    function brushed() {
+        const event = d3.event;
+        if (!event || !event.selection) return;
+    
+        const [x0, x1] = event.selection;
+    
+        // Calculate the domain values based on the selection extent
+        const xDomain = x.domain().filter((d, i) => {
+            const xPos = x(d) + x.bandwidth() / 2; // Center position of the band
+            return xPos >= x0 && xPos <= x1;
+        });
+    
+        // Filter data within the brushed range
+        const brushedData = data.filter(d => {
+            const recordYear = d['Record Date'].getFullYear();
+            return xDomain.includes(recordYear);
+        });
+    
+        console.log("Brushed Data:", brushedData);
+    
+        // Update other visualizations (e.g., bar chart)
+        updateGraph(brushedData);
+    }
+    
+
+const brushG = svg.append("g")
+    .attr("class", "brush")
+    .call(brush);
+
+    
     // Function to update the chart based on data
     function updateChart(data) {
       // Update domains for x and y scales based on your data
@@ -73,8 +105,7 @@ function createBarChart(selector) {
         .attr("text-anchor", "end")
         .text("Gross Cost (in Billions)");
   
-      // Draw bars based on the grouped data
-      svg.selectAll(".year-group")
+        svg.selectAll(".year-group")
         .data(Array.from(nestedData))
         .enter().append("g")
         .attr("class", "year-group")
@@ -86,8 +117,9 @@ function createBarChart(selector) {
         .attr("x", (d, i) => x.bandwidth() / uniqueDepartments.length * i)
         .attr("y", d => y(+d['Gross Cost (in Billions)']))
         .attr("height", d => height - y(+d['Gross Cost (in Billions)']))
-        .attr("width", x.bandwidth() / uniqueDepartments.length * 0.8)
-        .style("fill", "steelblue"); // Change colors as needed
+        .attr("width", x.bandwidth() / uniqueDepartments.length * 0.5)
+        .style("fill", d => colorScale(d['Department'])); // Use color scale for department
+
     }
   
     // Return the function to update the chart

@@ -9,7 +9,7 @@ function linegraph() {
     let height = 700 - margin.top - margin.bottom;
     let colorScale = d3.scaleOrdinal(d3.schemeCategory10);
   
-    function chart(selector, data) {
+    function chart(selector, data, colorMap) {
       const parseTime = d3.timeParse('%Y-%m-%d');
   
       data.forEach(d => {
@@ -32,7 +32,7 @@ function linegraph() {
   .on("end", function() {
     const event = d3.event;
     if (!event || !event.selection) return;
-
+    console.log(event.selection)
     const [x0, x1] = event.selection.map(xScale.invert);
 
     // Filter data within the brushed range
@@ -237,6 +237,7 @@ function handleChange() {
             .attr('d', line);
     });
 }
+
 
 
 chart.margin = function (_) {
