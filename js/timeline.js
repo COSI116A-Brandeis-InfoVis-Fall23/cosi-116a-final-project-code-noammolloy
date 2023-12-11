@@ -221,14 +221,5 @@ function timeline(){
   return timeline;
 };
 
-timeline();
-
-
-        
-    
-
-
-  return timeline;
-};
 
 timeline();
