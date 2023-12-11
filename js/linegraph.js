@@ -38,10 +38,11 @@ function linegraph() {
     // Filter data within the brushed range
     const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
 
-    // console.log("Brushed Data:", brushedData);
+    console.log("Brushed Data:", brushedData);
 
     // Update other visualizations (e.g., bar chart)
     // updateBarChart(brushedData);
+    // updateGraph(selectedDepartments = "Department of Veterans Affairs", brushedData)
   });
 
 // Append brush to the SVG
@@ -173,35 +174,41 @@ function handleChange() {
     console.log('Selected Departments:', selectedDepartments);
   }
   // clears and redraws graph with new parameters
-  function updateGraph(selectedDepartments, selectedYears = []) {
+  function updateGraph(selectedDepartments, selectedYears = [], brushedData = []) {
     svg.selectAll('.line').remove();
-    
-    // Filter data based on selected departments and optional selected years
-    const filteredData = lineChartData.filter(agencyData =>
-        selectedDepartments.includes(agencyData.name)
-        && (selectedYears.length === 0 || agencyData.values.some(d => selectedYears.includes(d.year))) // Filter only if years are provided
-    );
+    let filteredData;
+
+    if (brushedData.length > 0) {
+        // If brushedData is provided, use it for visualization
+        filteredData = brushedData;
+    } else {
+        // Filter data based on selected departments and optional selected years
+        filteredData = lineChartData.filter(agencyData =>
+            selectedDepartments.includes(agencyData.name)
+            && (selectedYears.length === 0 || agencyData.values.some(d => selectedYears.includes(d.date)))
+        );
+    }
 
     // Extract all x values from the selected departments within selected years (if provided)
     const allXValues = filteredData.flatMap(agencyData =>
         agencyData.values
-            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.year))
-            .map(d => d.x) // Assuming 'x' is the property for x-axis values
+            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
+            .map(d => d.date) // Assuming 'x' is the property for x-axis values
     );
 
     // Extract all y values from the selected departments within selected years (if provided)
     const allYValues = filteredData.flatMap(agencyData =>
         agencyData.values
-            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.year))
+            .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
             .map(d => !isNaN(d.cost) ? d.cost : 0) // Assuming 'cost' is the property for y-axis values
     );
 
-    // Get the maximum x and y values from the selected data
+    const minX = d3.min(allXValues);
     const maxX = d3.max(allXValues);
     const maxY = d3.max(allYValues);
 
     // Update xScale and yScale domains based on the maximum values
-    xScale.domain([0, maxX]);
+    xScale.domain([minX, maxX]);
     yScale.domain([0, maxY]);
 
     // Update x and y axes with the new scales
