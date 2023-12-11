@@ -233,7 +233,6 @@ function timeline(data){
             .attr('height', height)
             .attr('fill', '#7878784C'); // You can change the color as needed
     }
-    updateGraph(['Department1'], [2005, 2010]);
 
   return timeline;
 };
