@@ -23,6 +23,9 @@
         
         let lgDepExp = linegraph()
           ('#linegraph', fedExpData);
+
+          let barLucas = createBarChart('#barchartLucas');
+          barLucas(fedExpData);          
         
         let bar = barchart()
           ("#barchart", fedExpData);

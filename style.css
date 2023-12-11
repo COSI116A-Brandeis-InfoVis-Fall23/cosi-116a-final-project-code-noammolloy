@@ -163,3 +163,9 @@ option {
 	display:flex;
 	flex-direction: row;
   }
+  .bar {
+	fill: steelblue;
+  }
+  .bar:hover {
+	fill: orange;
+  }

@@ -1,4 +1,4 @@
-function timeline(){
+function timeline(data){
     var width = 985
     var height = 20; 
     var svg = d3.select("#tl") 
@@ -216,7 +216,23 @@ function timeline(){
 
     var svg15= d3.select("#br").append("svg").attr("width", 900).attr("height", 50)
 
-
+    
+    function updateGraph(selectedDepartments, selectedYears = []) {
+    
+        // Add visual cues for selected years on the timeline
+        svg.selectAll('.timeline-highlight').remove(); // Remove existing highlights
+    
+        svg.selectAll('.timeline-highlight')
+            .data(selectedYears)
+            .enter()
+            .append('rect')
+            .attr('class', 'timeline-highlight')
+            .attr('x', year => scale(year) + 10) // Adjust as needed based on your timeline configuration
+            .attr('y', 0)
+            .attr('width', 42.5) // Adjust the width based on your timeline configuration
+            .attr('height', height)
+            .attr('fill', '#7878784C'); // You can change the color as needed
+    }
 
   return timeline;
 };
