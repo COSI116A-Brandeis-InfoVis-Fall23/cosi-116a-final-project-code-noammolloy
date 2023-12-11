@@ -35,6 +35,16 @@
           tmDepExp.updateSelection(value);
         });
 
+        lgDepExp.selectionDispatcher().on(dispatchString, function(value) {
+          barchart.updateSelection(value);
+        });
+
+        barchart.selectionDispatcher().on(dispatchString, function(value) {
+          lgDepExp.updateSelection(value);
+        });
+
+
+
       });
     });
   });
