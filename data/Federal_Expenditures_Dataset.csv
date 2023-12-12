@@ -32,7 +32,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2022-09-30,2022,N,Securities and Exchange Commission,2.6,2.4,0.2,0,0.2,2022,2022
 2022-09-30,2022,N,National Credit Union Administration,0.3,0.1,0.2,0,0.2,2022,2022
 2022-09-30,2022,N,U.S. Nuclear Regulatory Commission,0.8,0.7,0.1,0,0.1,2022,2022
-2022-09-30,2022,N,United States International Development Finance Corporation,0.3,0.2,0.1,0,0.1,2022,2022
 2022-09-30,2022,N,Export-Import Bank of the United States,0,0.5,-0.5,0,-0.5,2022,2022
 2022-09-30,2022,N,General Services Administration,0.3,0.9,-0.6,0,-0.6,2022,2022
 2022-09-30,2022,N,Farm Credit System Insurance Corporation,0,0.6,-0.6,0,-0.6,2022,2022
@@ -74,7 +73,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2022-09-30,2021,Y,Securities and Exchange Commission,2.4,2.5,-0.1,0,-0.1,2022,2022
 2022-09-30,2021,Y,National Credit Union Administration,0.2,0.1,0.1,0,0.1,2022,2022
 2022-09-30,2021,Y,U.S. Nuclear Regulatory Commission,0.9,0.7,0.2,0,0.2,2022,2022
-2022-09-30,2021,Y,United States International Development Finance Corporation,0,0.2,-0.2,0,-0.2,2022,2022
 2022-09-30,2021,Y,Export-Import Bank of the United States,0.5,0.7,-0.2,0,-0.2,2022,2022
 2022-09-30,2021,Y,General Services Administration,-0.1,0.9,-1,0,-1,2022,2022
 2022-09-30,2021,Y,Farm Credit System Insurance Corporation,0,0.4,-0.4,0,-0.4,2022,2022
@@ -116,7 +114,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2021-09-30,2021,N,National Credit Union Administration,0.2,0.1,0.1,0,0.1,2021,2021
 2021-09-30,2021,N,Securities and Exchange Commission,2.4,2.5,-0.1,0,-0.1,2021,2021
 2021-09-30,2021,N,Export-Import Bank of the U.S.,0.5,0.7,-0.2,0,-0.2,2021,2021
-2021-09-30,2021,N,U.S. International Development Finance Corporation,0,0.2,-0.2,0,-0.2,2021,2021
 2021-09-30,2021,N,Farm Credit System Insurance Corporation,0,0.4,-0.4,0,-0.4,2021,2021
 2021-09-30,2021,N,General Services Administration,-0.1,0.9,-1,0,-1,2021,2021
 2021-09-30,2021,N,Tennessee Valley Authority,8.8,10.4,-1.6,0,-1.6,2021,2021
@@ -158,7 +155,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2021-09-30,2020,Y,National Credit Union Administration,0.3,0.2,0.1,0,0.1,2021,2021
 2021-09-30,2020,Y,Securities and Exchange Commission,2.2,3.3,-1.1,0,-1.1,2021,2021
 2021-09-30,2020,Y,Export-Import Bank of the U.S.,0.8,0.4,0.4,0,0.4,2021,2021
-2021-09-30,2020,Y,U.S. International Development Finance Corporation,0,0.1,-0.1,0,-0.1,2021,2021
 2021-09-30,2020,Y,Farm Credit System Insurance Corporation,0.1,0.2,-0.1,0,-0.1,2021,2021
 2021-09-30,2020,Y,General Services Administration,0.3,0.8,-0.5,0,-0.5,2021,2021
 2021-09-30,2020,Y,Tennessee Valley Authority,8.8,10.1,-1.3,0,-1.3,2021,2021
@@ -199,7 +195,6 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2020-09-30,2020,N,Export-Import Bank of the U.S.,0.8,0.4,0.4,0,0.4,2020,2020
 2020-09-30,2020,N,U.S. Nuclear Regulatory Commission,0.9,0.7,0.2,0,0.2,2020,2020
 2020-09-30,2020,N,National Credit Union Administration,0.3,0.2,0.1,0,0.1,2020,2020
-2020-09-30,2020,N,U.S. International Development Finance Corporation,0,0.1,-0.1,0,-0.1,2020,2020
 2020-09-30,2020,N,Farm Credit System Insurance Corporation,0.1,0.2,-0.1,0,-0.1,2020,2020
 2020-09-30,2020,N,General Services Administration,0.3,0.8,-0.5,0,-0.5,2020,2020
 2020-09-30,2020,N,Securities and Exchange Commission,2.2,3.3,-1.1,0,-1.1,2020,2020
@@ -1692,4 +1687,5 @@ Record Date,Statement Fiscal Year,Restatement Flag,Agency Name,Gross Cost (in Bi
 2001-09-30,2000,Y,U.S. Postal Service,92,64.5,null,null,27.5,2001,2001
 2001-09-30,2000,Y,All other entities,17.7,0.8,null,null,16.9,2001,2001
 2001-09-30,2000,Y,Total,2157.3,156.9,null,null,2000.4,2001,2001
+
 
