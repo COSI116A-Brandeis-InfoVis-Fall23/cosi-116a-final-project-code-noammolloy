@@ -124,7 +124,7 @@ function linegraph() {
       const checkboxContainer = commonParent.insert('div', 'linegraph-holder')
           .attr('class', 'checkbox-container')
           .style('position', 'absolute')
-          .style('left', `${linegraphX}px`)
+          .style('left', `${linegraphRect.right}px`)
           .style('top', `${linegraphY}px`);
 
       // Append a checkbox item for each selected department
