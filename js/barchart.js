@@ -145,7 +145,9 @@ function barchart() {
                 .attr("y", item => y(+item['Gross Cost (in Billions)']))
                 .attr("height", item => height - y(+item['Gross Cost (in Billions)']))
                 .attr("width", barWidth)
-                .style("fill", item => colorScale(item['Agency Name']));
+                .style("fill", item => colorScale(item['Agency Name']))
+                .append("title")  // Add a title element for the tooltip
+                .text(item => `Department: ${item['Agency Name']}\nGross Cost: ${item['Gross Cost (in Billions)']} Billion`);
         });
     });
 
