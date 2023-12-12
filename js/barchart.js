@@ -143,7 +143,7 @@ function barchart() {
                 .attr("y", item => y(+item['Gross Cost (in Billions)']))
                 .attr("height", item => height - y(+item['Gross Cost (in Billions)']))
                 .attr("width", barWidth)
-                .style("fill", item => colorScale(item['Department']));
+                .style("fill", item => colorScale(item['Agency Name']));
         });
     });
 
