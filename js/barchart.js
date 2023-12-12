@@ -1,7 +1,7 @@
 function barchart() {
 
   // Define dimensions and margins for the chart
-  const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+  const margin = { top: 20, right: 10, bottom: 30, left: 40 };
   const width = 800 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
   let dispatcher;
@@ -143,7 +143,7 @@ function barchart() {
                 .attr("y", item => y(+item['Gross Cost (in Billions)']))
                 .attr("height", item => height - y(+item['Gross Cost (in Billions)']))
                 .attr("width", barWidth)
-                .style("fill", item => colorScale(item['Department']));
+                .style("fill", item => colorScale(item['Agency Name']));
         });
     });
 
