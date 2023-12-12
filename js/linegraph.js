@@ -41,9 +41,10 @@ function linegraph() {
           const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
 
           console.log("Brushed Data:", brushedData);
-
+          let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+          dispatcher.call(dispatchString, this, brushedData);
           // Update other visualizations (e.g., bar chart)
-          updateChart(brushedData);
+          // updateChart(brushedData);
           // updateGraph(selectedDepartments = "Department of Veterans Affairs", brushedData)
         });
 
@@ -294,9 +295,7 @@ function linegraph() {
 
   chart.updateSelection = function (selectedData) {
       if (!arguments.length) return;
-      selectableElements.classed("selected", d => {
-          return selectedData.includes(d.data)
-      });
+      
   };
   
   return chart;

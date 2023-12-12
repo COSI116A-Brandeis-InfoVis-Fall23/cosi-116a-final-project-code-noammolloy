@@ -24,8 +24,16 @@ function barchart() {
     const yAxis = d3.axisLeft().scale(y).ticks(10);
     
     const brush = d3.brushX()
-    .extent([[0, 0], [width, height]])
-    .on("end", brushed);
+            .extent([[0, 0], [width, height]])
+            .on("end", brushed);
+
+            console.log("Before brush creation", svg); // Check the SVG before brush creation
+
+            const brushG = svg.append("g")
+                .attr("class", "brush")
+                .call(brush);
+            
+            console.log("After brush creation", svg);
 
     function brushed() {
         const event = d3.event;
@@ -47,22 +55,19 @@ function barchart() {
     
         console.log("Brushed Data:", brushedData);
     
-        // Update other visualizations (e.g., bar chart)
+        // Update other visualizations (e.g., line chart)
         // updateGraph(brushedData);
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
-        dispatcher.call(dispatchString, this, this.value);
+        dispatcher.call(dispatchString, this, brushedData);
 
     }
     
-
-    const brushG = svg.append("g")
-      .attr("class", "brush")
-      .call(brush);
 
     updateChart()
 
     // Function to update the chart based on data
     function updateChart() {
+        svg.selectAll("*").remove();
       // Update domains for x and y scales based on your data
       const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
       data.reverse();
@@ -145,7 +150,8 @@ function barchart() {
 
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    brushedData = selectedData;
+    data = selectedData;
+    chart.updateChart()
   };
 
   return chart;
