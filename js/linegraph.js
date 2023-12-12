@@ -37,15 +37,12 @@ function linegraph() {
           console.log(event.selection)
           const [x0, x1] = event.selection.map(xScale.invert);
 
-          // Filter data within the brushed range
+          // Filter data
           const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
 
           console.log("Brushed Data:", brushedData);
           let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
           dispatcher.call(dispatchString, this, brushedData);
-          // Update other visualizations (e.g., bar chart)
-          // updateChart(brushedData);
-          // updateGraph(selectedDepartments = "Department of Veterans Affairs", brushedData)
         });
 
       // Append brush to the SVG
@@ -108,9 +105,6 @@ function linegraph() {
         .style('text-anchor', 'middle')
         .style('font-size', '14px')
         .text('Gross Cost (in Billions)');
-
-          const itemsPerColumn = 10;
-          const legendWidth = 400;
 
           const commonParent = d3.select('.vis-holder');
 
