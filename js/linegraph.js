@@ -148,7 +148,7 @@ function linegraph() {
 
 
             const line = d3.line()
-        .defined(d => !isNaN(d.cost)) // Filter out NaN values in 'cost'
+        .defined(d => !isNaN(d.cost)) // Filter out NaN values in cost
         .x(d => xScale(d.date))
         .y(d => yScale(d.cost));
 
@@ -156,7 +156,7 @@ function linegraph() {
       // Loop through each agency's data and draw a line for each
       lineChartData.forEach(agencyData => {
         svg.append('path')
-          .datum(agencyData.values.filter(d => !isNaN(d.cost))) // Filter out NaN values in 'cost'
+          .datum(agencyData.values.filter(d => !isNaN(d.cost))) // Filter out NaN values in cost
           .attr('fill', 'none')
           .attr('stroke', colorScale(agencyData.name))
           .attr('d', line);
@@ -186,18 +186,18 @@ function linegraph() {
               );
           }
 
-          // Extract all x values from the selected departments within selected years (if provided)
+          // Extract all x values from the selected departments within selected years
           const allXValues = filteredData.flatMap(agencyData =>
               agencyData.values
                   .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
                   .map(d => d.date) // Assuming 'x' is the property for x-axis values
           );
 
-          // Extract all y values from the selected departments within selected years (if provided)
+          // Extract all y values from the selected departments within selected years
           const allYValues = filteredData.flatMap(agencyData =>
               agencyData.values
                   .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
-                  .map(d => !isNaN(d.cost) ? d.cost : 0) // Assuming 'cost' is the property for y-axis values
+                  .map(d => !isNaN(d.cost) ? d.cost : 0) // Assuming cost is the property for y-axis values
           );
 
           const minX = d3.min(allXValues);
@@ -222,7 +222,7 @@ function linegraph() {
           // Clear existing graph
           svg.selectAll('path').remove();
 
-          // Draw lines for the selected departments within selected years (if provided)
+          // Draw lines for the selected departments within selected years
           filteredData.forEach(agencyData => {
               const filteredValues = agencyData.values.filter(d =>
                   selectedDepartments.includes(agencyData.name) && (selectedYears.length === 0 || selectedYears.includes(d.year))
