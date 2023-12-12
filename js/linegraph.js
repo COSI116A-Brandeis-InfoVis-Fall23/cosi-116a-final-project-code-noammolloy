@@ -34,13 +34,11 @@ function linegraph() {
         .on("end", function() {
           const event = d3.event;
           if (!event || !event.selection) return;
-          console.log(event.selection)
           const [x0, x1] = event.selection.map(xScale.invert);
 
           // Filter data
           const brushedData = data.filter(d => x0 <= d['Record Date'] && d['Record Date'] <= x1);
 
-          console.log("Brushed Data:", brushedData);
           let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
           dispatcher.call(dispatchString, this, brushedData);
         });
@@ -168,7 +166,6 @@ function linegraph() {
             .data()
             .map(d => d);
           updateGraph(selectedDepartments)
-          console.log('Selected Departments:', selectedDepartments);
         }
         // clears and redraws graph with new parameters
         function updateGraph(selectedDepartments, selectedYears = [], brushedData = []) {
@@ -190,14 +187,14 @@ function linegraph() {
           const allXValues = filteredData.flatMap(agencyData =>
               agencyData.values
                   .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
-                  .map(d => d.date) // Assuming 'x' is the property for x-axis values
+                  .map(d => d.date)
           );
 
           // Extract all y values from the selected departments within selected years
           const allYValues = filteredData.flatMap(agencyData =>
               agencyData.values
                   .filter(d => selectedYears.length === 0 || selectedYears.includes(d.date))
-                  .map(d => !isNaN(d.cost) ? d.cost : 0) // Assuming cost is the property for y-axis values
+                  .map(d => !isNaN(d.cost) ? d.cost : 0)
           );
 
           const minX = d3.min(allXValues);

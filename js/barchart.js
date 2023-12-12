@@ -27,13 +27,10 @@ function barchart() {
             .extent([[0, 0], [width, height]])
             .on("end", brushed);
 
-            console.log("Before brush creation", svg); // Check the SVG before brush creation
-
             const brushG = svg.append("g")
                 .attr("class", "brush")
                 .call(brush);
             
-            console.log("After brush creation", svg);
 
     function brushed() {
         const event = d3.event;
@@ -53,10 +50,6 @@ function barchart() {
             return xDomain.includes(recordYear);
         });
     
-        console.log("Brushed Data:", brushedData);
-    
-        // Update other visualizations (e.g., line chart)
-        // updateGraph(brushedData);
         let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
         dispatcher.call(dispatchString, this, brushedData);
 
@@ -68,30 +61,25 @@ function barchart() {
     // Function to update the chart based on data
     function updateChart(data) {
         svg.selectAll("*:not(.brush)").remove();
-      // Update domains for x and y scales based on your data
+      // Update domains for x and y scales based on data
       const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
-    //   data.reverse();
       data = data.filter(d => d["Agency Name"] !== "Total");
       data = data.filter(d => !isNaN(d['Gross Cost (in Billions)']));
       data = data.filter(d => d['Gross Cost (in Billions)'] >= 0);
-        console.log(data)
       data.forEach(d => {
         if (d['Record Date'] && parseTime(d['Record Date'])) {
           d['Record Date'] = parseTime(d['Record Date']);
           d['Gross Cost (in Billions)'] = parseFloat(d['Gross Cost (in Billions)']);
         } 
-      //   else {
-      //     console.error("Invalid 'Record Date' found:", d['Record Date']);
-      //   }
       });
   
-      // Extract unique years from your data
+      // Extract unique years from data
       const uniqueYears = Array.from(new Set(data.map(d => d['Record Date'].getFullYear())));
   
       // Group data by year and then by department
       const nestedData = d3.group(data, d => d['Record Date'].getFullYear());
   
-      // Extract unique departments from your data
+      // Extract unique departments from data
       const uniqueDepartments = Array.from(new Set(data.map(d => d['Department'])));
   
       uniqueYears.reverse();
@@ -129,8 +117,8 @@ function barchart() {
         .attr("transform", d => `translate(${x(d[0])},0)`)
         .each(function (d) {
           const barsInYear = d[1].length;
-          const barWidth = x.bandwidth() / (barsInYear * uniqueDepartments.length + 1); // Adjusted barWidth calculation
-          const gap = barWidth; // Adjusted gap calculation
+          const barWidth = x.bandwidth() / (barsInYear * uniqueDepartments.length + 1);
+          const gap = barWidth;
         
         uniqueDepartments.forEach((department, i) => {
             const barsForDepartment = d[1].filter(item => item['Department'] === department);
@@ -169,9 +157,6 @@ function barchart() {
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
     data = selectedData;
-    console.log("updateselection", data)
-    // Assuming 'data' is your array of objects containing duplicate entries
-    // Assuming 'data' is your array of objects containing duplicates
     const uniqueDepartments = Array.from(new Set(data.map(d => d['Department'])));
 
 // Calculate the number of unique departments
@@ -190,7 +175,6 @@ for (let i = 0; i < data.length; i += numUniqueDepartments * 2) {
 }
     
 
-console.log("CLEAND", newDataArray)
     chart.updateChart(newDataArray)
   };
 
