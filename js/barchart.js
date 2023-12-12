@@ -43,7 +43,7 @@ function barchart() {
     
         // Calculate the domain values based on the selection extent
         const xDomain = x.domain().filter((d, i) => {
-            const xPos = x(d) + x.bandwidth() / 2; // Center position of the band
+            const xPos = x(d['Record Date']); // Use x scale for the 'Record Date'
             return xPos >= x0 && xPos <= x1;
         });
     
@@ -63,18 +63,18 @@ function barchart() {
     }
     
 
-    updateChart()
+    updateChart(data)
 
     // Function to update the chart based on data
-    function updateChart() {
+    function updateChart(data) {
         svg.selectAll("*").remove();
       // Update domains for x and y scales based on your data
       const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
-      data.reverse();
+    //   data.reverse();
       data = data.filter(d => d["Agency Name"] !== "Total");
       data = data.filter(d => !isNaN(d['Gross Cost (in Billions)']));
       data = data.filter(d => d['Gross Cost (in Billions)'] >= 0);
-  
+        console.log(data)
       data.forEach(d => {
         if (d['Record Date'] && parseTime(d['Record Date'])) {
           d['Record Date'] = parseTime(d['Record Date']);
@@ -151,7 +151,8 @@ function barchart() {
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
     data = selectedData;
-    chart.updateChart()
+    console.log(data)
+    chart.updateChart(data)
   };
 
   return chart;
