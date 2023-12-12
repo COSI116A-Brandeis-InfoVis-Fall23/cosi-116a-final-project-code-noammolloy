@@ -7,8 +7,6 @@
 
         const dispatchString = "selectionUpdated";
 
-        
-
         let yearSlider = yearslider()
           .min(2000)
           .max(2021)
@@ -27,19 +25,19 @@
           .selectionDispatcher(d3.dispatch(dispatchString))
           ('#linegraph', fedExpData);
 
-          let barchart = barchart()
-            .selectionDispatcher(d3.dispatch(dispatchString))
-            ('#barchart', lgDepExp.colorScale(), fedExpData);
+        let bcDepExp = barchart()
+          .selectionDispatcher(d3.dispatch(dispatchString))
+          ('#barchart', lgDepExp.colorScale(), fedExpData);
         
         yearSlider.selectionDispatcher().on(dispatchString, function(value) {
           tmDepExp.updateSelection(value);
         });
 
         lgDepExp.selectionDispatcher().on(dispatchString, function(value) {
-          barchart.updateSelection(value);
+          bcDepExp.updateSelection(value);
         });
 
-        barchart.selectionDispatcher().on(dispatchString, function(value) {
+        bcDepExp.selectionDispatcher().on(dispatchString, function(value) {
           lgDepExp.updateSelection(value);
         });
 

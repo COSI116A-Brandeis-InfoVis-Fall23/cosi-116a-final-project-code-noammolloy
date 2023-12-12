@@ -7,7 +7,7 @@ function barchart() {
   let dispatcher;
 
 
-  function createBarChart(selector, colorScale, data) {
+  function chart(selector, colorScale, data) {
   
     // Create an SVG element
     const svg = d3.select(selector)
@@ -59,9 +59,10 @@ function barchart() {
       .attr("class", "brush")
       .call(brush);
 
-    
+    updateChart()
+
     // Function to update the chart based on data
-    function updateChart(data) {
+    function updateChart() {
       // Update domains for x and y scales based on your data
       const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
       data.reverse();
@@ -129,20 +130,23 @@ function barchart() {
         .style("fill", d => colorScale(d['Department'])); // Use color scale for department
 
     }
+    
+    chart.updateChart = updateChart;
   
     // Return the function to update the chart
-    return updateChart;
+    return chart;
   }
 
-  updateChart.selectionDispatcher = function (_) {
+  chart.selectionDispatcher = function (_) {
     if (!arguments.length) return dispatcher;
     dispatcher = _;
-    return updateChart;
+    return chart;
   };
 
-  updateChart.updateSelection = function (selectedData) {
+  chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
     brushedData = selectedData;
   };
 
+  return chart;
 }
