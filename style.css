@@ -180,3 +180,8 @@ option {
 	overflow-y: scroll; 
 	margin: 10px;
   } 
+
+  img {
+	width: 600px; 
+	display: block;
+  }
