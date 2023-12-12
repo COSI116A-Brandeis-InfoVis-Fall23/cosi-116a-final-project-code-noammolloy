@@ -2,7 +2,7 @@ function barchart() {
 
   // Define dimensions and margins for the chart
   const margin = { top: 20, right: 20, bottom: 30, left: 40 };
-  const width = 900 - margin.left - margin.right;
+  const width = 800 - margin.left - margin.right;
   const height = 400 - margin.top - margin.bottom;
   let dispatcher;
 
@@ -18,7 +18,7 @@ function barchart() {
       .attr("transform", `translate(${margin.left},${margin.top})`);
   
     // Define your scales (x and y scales)
-    const x = d3.scaleBand().rangeRound([0, width]).padding(.9);
+    const x = d3.scaleBand().rangeRound([0, width]).padding(.00001);
     const y = d3.scaleLinear().rangeRound([height, 0]);
     const xAxis = d3.axisBottom().scale(x);
     const yAxis = d3.axisLeft().scale(y).ticks(10);
@@ -67,7 +67,7 @@ function barchart() {
 
     // Function to update the chart based on data
     function updateChart(data) {
-        svg.selectAll("*").remove();
+        svg.selectAll("*:not(.brush)").remove();
       // Update domains for x and y scales based on your data
       const parseTime = d3.timeParse("%a %b %d %Y %H:%M:%S GMT%Z");
     //   data.reverse();
@@ -120,19 +120,33 @@ function barchart() {
         .text("Gross Cost (in Billions)");
   
         svg.selectAll(".year-group")
-        .data(Array.from(nestedData))
-        .enter().append("g")
-        .attr("class", "year-group")
-        .attr("transform", d => `translate(${x(d[0])},0)`)
-        .selectAll(".bar")
-        .data(d => d[1])
-        .enter().append("rect")
-        .attr("class", "bar")
-        .attr("x", (d, i) => x.bandwidth() / uniqueDepartments.length * i)
-        .attr("y", d => y(+d['Gross Cost (in Billions)']))
-        .attr("height", d => height - y(+d['Gross Cost (in Billions)']))
-        .attr("width", x.bandwidth() / uniqueDepartments.length * 0.5)
-        .style("fill", d => colorScale(d['Department'])); // Use color scale for department
+    .data(Array.from(nestedData))
+    .enter()
+    .append("g")
+    .attr("class", "year-group")
+    .attr("transform", d => `translate(${x(d[0])},0)`)
+    .each(function (d) {
+        const barsInYear = d[1].length;
+        const barWidth = x.bandwidth() / (barsInYear * uniqueDepartments.length + 1); // Adjusted barWidth calculation
+        const gap = barWidth; // Adjusted gap calculation
+        
+        uniqueDepartments.forEach((department, i) => {
+            const barsForDepartment = d[1].filter(item => item['Department'] === department);
+            
+            d3.select(this)
+                .selectAll(".bar")
+                .data(barsForDepartment)
+                .enter()
+                .append("rect")
+                .attr("class", "bar")
+                .attr("x", (item, j) => x(item['Record Date'].getFullYear()) + gap + (i * (barsInYear * barWidth + gap)) + (j * (barWidth + gap)))
+                .attr("y", item => y(+item['Gross Cost (in Billions)']))
+                .attr("height", item => height - y(+item['Gross Cost (in Billions)']))
+                .attr("width", barWidth)
+                .style("fill", item => colorScale(item['Department']));
+        });
+    });
+
 
     }
     
@@ -151,8 +165,29 @@ function barchart() {
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
     data = selectedData;
-    console.log(data)
-    chart.updateChart(data)
+    console.log("updateselection", data)
+    // Assuming 'data' is your array of objects containing duplicate entries
+    // Assuming 'data' is your array of objects containing duplicates
+    const uniqueDepartments = Array.from(new Set(data.map(d => d['Department'])));
+
+// Calculate the number of unique departments
+const numUniqueDepartments = uniqueDepartments.length;
+
+// Define an array to hold the chunks of data
+const newDataArray = [];
+
+// Loop to create chunks of data and skip the next chunk
+for (let i = 0; i < data.length; i += numUniqueDepartments * 2) {
+    // Get a chunk of data equal to the number of unique departments
+    const chunk = data.slice(i, i + numUniqueDepartments);
+    
+    // Append the chunk to the new array
+    newDataArray.push(...chunk);
+}
+    
+
+console.log("CLEAND", newDataArray)
+    chart.updateChart(newDataArray)
   };
 
   return chart;
