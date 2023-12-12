@@ -94,6 +94,8 @@ function barchart() {
       // Extract unique departments from your data
       const uniqueDepartments = Array.from(new Set(data.map(d => d['Department'])));
   
+      uniqueYears.reverse();
+
       // Update the x-axis domain with unique years
       x.domain(uniqueYears);
       y.domain([0, d3.max(data, d => +d['Gross Cost (in Billions)'])]);
