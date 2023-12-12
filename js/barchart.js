@@ -120,15 +120,15 @@ function barchart() {
         .text("Gross Cost (in Billions)");
   
         svg.selectAll(".year-group")
-    .data(Array.from(nestedData))
-    .enter()
-    .append("g")
-    .attr("class", "year-group")
-    .attr("transform", d => `translate(${x(d[0])},0)`)
-    .each(function (d) {
-        const barsInYear = d[1].length;
-        const barWidth = x.bandwidth() / (barsInYear * uniqueDepartments.length + 1); // Adjusted barWidth calculation
-        const gap = barWidth; // Adjusted gap calculation
+        .data(Array.from(nestedData))
+        .enter()
+        .append("g")
+        .attr("class", "year-group")
+        .attr("transform", d => `translate(${x(d[0])},0)`)
+        .each(function (d) {
+          const barsInYear = d[1].length;
+          const barWidth = x.bandwidth() / (barsInYear * uniqueDepartments.length + 1); // Adjusted barWidth calculation
+          const gap = barWidth; // Adjusted gap calculation
         
         uniqueDepartments.forEach((department, i) => {
             const barsForDepartment = d[1].filter(item => item['Department'] === department);
